@@ -1,0 +1,222 @@
+{
+  "description": "Offline ordinary service payment fixture: public test identities; never fund. Evidence does not represent a real chain execution.",
+  "seeds": {
+    "service": "0303030303030303030303030303030303030303030303030303030303030303",
+    "sender": "0707070707070707070707070707070707070707070707070707070707070707",
+    "recipient": "0909090909090909090909090909090909090909090909090909090909090909"
+  },
+  "secretKeys": {
+    "service": "0x0303030303030303030303030303030303030303030303030303030303030303ed4928c628d1c2c6eae90338905995612959273a5c63f93636c14614ac8737d1",
+    "sender": "0x0707070707070707070707070707070707070707070707070707070707070707ea4a6c63e29c520abef5507b132ec5f9954776aebebe7b92421eea691446d22c",
+    "recipient": "0x0909090909090909090909090909090909090909090909090909090909090909fd1724385aa0c75b64fb78cd602fa1d991fdebf76b13c58ed702eac835e9f618"
+  },
+  "endpoint": "https://ordinary.example",
+  "manifest": {
+    "protocolVersion": 2,
+    "messageId": "790c4c71-4ebc-4d72-87a5-b1bc3a23a22a",
+    "senderId": "did:abt:z1bNj6aF8PRNSBrdC8hEF6kXBL5pTkR7t8J",
+    "recipientId": "did:abt:z1c8HKfzfGcrMmk2cHPguaZGZWeAtCJkazP",
+    "serviceId": "did:abt:zNKbESQJncfNpnTno4d8j5kt2ZrZuME9xLnL",
+    "createdAt": "2026-10-28T06:28:09.233Z",
+    "planId": "ordinary",
+    "cryptoSuite": "HPKE-X25519-HKDF-SHA256-AES256GCM",
+    "keyEnvelopes": [
+      {
+        "ownerId": "did:abt:z1bNj6aF8PRNSBrdC8hEF6kXBL5pTkR7t8J",
+        "keyId": "591d77ce14d576a01524a4e0438ed1e63c418b5ab9970f4defb0e52227350a08",
+        "keyRecord": {
+          "protocolVersion": 1,
+          "ownerId": "did:abt:z1bNj6aF8PRNSBrdC8hEF6kXBL5pTkR7t8J",
+          "keyId": "591d77ce14d576a01524a4e0438ed1e63c418b5ab9970f4defb0e52227350a08",
+          "cryptoSuite": "HPKE-X25519-HKDF-SHA256-AES256GCM",
+          "publicKey": "OlnNUhZQQH5bTAjrlGl2pouiKCl9XlVzGtlBwvc_ok4",
+          "createdAt": "2026-10-28T06:27:09.199Z",
+          "expiresAt": "2027-10-28T06:27:09.199Z",
+          "proof": {
+            "algorithm": "Ed25519",
+            "verificationMethod": "did:abt:z1bNj6aF8PRNSBrdC8hEF6kXBL5pTkR7t8J#identity",
+            "publicKey": "6kpsY-KcUgq-9VB7Ey7F-ZVHdq6-vnuSQh7qaRRG0iw",
+            "signature": "F_VSQgmgSFPPjA7h5SfsCxEmk7UHdH8Lx2Heo_-6935DvhFxNA0qvyzcCY7JDO2njof8zY77mLVdrWyJBxRhAA"
+          }
+        },
+        "encapsulatedKey": "zjm_lshbB76bxGwIOS4yyFL_0eHA2LIQ8z5ATIk7PRQ",
+        "ciphertext": "tyTlnDAm_HLwBbH8QrxXgOMrPfDu2eP9pXmx-ujMY5ooQmFumo6SRHoFLHMCw8xp"
+      },
+      {
+        "ownerId": "did:abt:z1c8HKfzfGcrMmk2cHPguaZGZWeAtCJkazP",
+        "keyId": "73c6dc250cfcaae9f0fd149f4a570b90cddbf520bd1eb6a7f804622430741dee",
+        "keyRecord": {
+          "protocolVersion": 1,
+          "ownerId": "did:abt:z1c8HKfzfGcrMmk2cHPguaZGZWeAtCJkazP",
+          "keyId": "73c6dc250cfcaae9f0fd149f4a570b90cddbf520bd1eb6a7f804622430741dee",
+          "cryptoSuite": "HPKE-X25519-HKDF-SHA256-AES256GCM",
+          "publicKey": "JwN8a5FAncz1_qg1DIfXH2M9UIF-n4u9BC1w25sZb1g",
+          "createdAt": "2026-10-28T06:27:09.216Z",
+          "expiresAt": "2027-10-28T06:27:09.216Z",
+          "proof": {
+            "algorithm": "Ed25519",
+            "verificationMethod": "did:abt:z1c8HKfzfGcrMmk2cHPguaZGZWeAtCJkazP#identity",
+            "publicKey": "_RckOFqgx1tk-3jNYC-h2ZH96_drE8WO1wLqyDXp9hg",
+            "signature": "C8N0ShaV3DOq7LdEHWFYF1B7lnaO0rR3UQihIuC4qRwqkwpZ90MsEvUfoEj9pMqTzv1ZOAcQeIXmq7yxciapDA"
+          }
+        },
+        "encapsulatedKey": "oQelqsW4azwFAk9L1m2_pL-Ho98Nh1BXgKAlEoiiinE",
+        "ciphertext": "WD8nfchNROVjTNfI_Tkr09mqZUe2sYa83rLxhkn_C1ERLM7NALRSAriUHpmBAG8d"
+      }
+    ],
+    "documentBlobId": "ea1e9c93-d2ec-46bb-9d56-5f575456b8c7",
+    "blobs": [
+      {
+        "blobId": "ea1e9c93-d2ec-46bb-9d56-5f575456b8c7",
+        "sizeBytes": 301,
+        "chunkCount": 1,
+        "ciphertextSha256": "fdad581460a08acde2ae87ac1480ca9d6d73730a045c85ff0b448d4a8754805a",
+        "chunkSha256": [
+          "fdad581460a08acde2ae87ac1480ca9d6d73730a045c85ff0b448d4a8754805a"
+        ]
+      },
+      {
+        "blobId": "ac1b82ff-71d0-497b-a3d6-d0013c48d86d",
+        "sizeBytes": 20,
+        "chunkCount": 1,
+        "ciphertextSha256": "c8a86fc3956bc4d0aec0f19702d1652b046b7bb13b1f46424711f641b8f90635",
+        "chunkSha256": [
+          "c8a86fc3956bc4d0aec0f19702d1652b046b7bb13b1f46424711f641b8f90635"
+        ]
+      }
+    ],
+    "proof": {
+      "algorithm": "Ed25519",
+      "verificationMethod": "did:abt:z1bNj6aF8PRNSBrdC8hEF6kXBL5pTkR7t8J#identity",
+      "publicKey": "6kpsY-KcUgq-9VB7Ey7F-ZVHdq6-vnuSQh7qaRRG0iw",
+      "signature": "9cbTw_75UAfE4QQVSEVqnF09FKaSAh7DJAVi3YUwND1ZnVM93biWN6DVq8JmXwRSphNZ8Akx8G-5EBlpteJ9DA"
+    }
+  },
+  "chunks": {
+    "ea1e9c93-d2ec-46bb-9d56-5f575456b8c7": [
+      "YkItaehg56-a-rIlY7KMvOV1Xxz3zJDQBBkq4hIdSN9kHmGF_816bLwV4I9lNXJpNTVtRcHUPtTmErmDOZ8168YVtg1ljaj3By6y8fCyMIFQKSKGN2NGTu-VawKXRyr9MVR1u3M5Yehw5Cxb3DOf6F8jbqEBxvnIfGHzXzlHHYXaWjasQtF1nO_xeUhBcXf4H-u-qZ0Fm_0HHY4wbKdJ1Hf7JY5sgbT4SqjHhs62Ho7CRtQIp4ciAmh-kntdi_mAv9p6foH6fbL8qScLj1bhyaHugq2Zslu0c34V1sppHZXEu1gdzEx9-epe-AsaalNWdc8zO6xT5dgvjONdwRTXatIfOdVEr0CsXfkLLeiK34DYsb9LkDgvFIrBvoCxM_yOeBmlnk94hi4HV6b4tw"
+    ],
+    "ac1b82ff-71d0-497b-a3d6-d0013c48d86d": [
+      "nP1nqjkmznB-_UMZDqz6CN1a9cY"
+    ]
+  },
+  "terms": {
+    "protocolVersion": 2,
+    "termsId": "b5caa846-57e7-4539-bb96-a81399ba55e4",
+    "messageId": "790c4c71-4ebc-4d72-87a5-b1bc3a23a22a",
+    "manifestSha256": "262adbb2b0932d033a812998b53e38d6a15d10e5d60723d06b9541880ebf90b9",
+    "senderId": "did:abt:z1bNj6aF8PRNSBrdC8hEF6kXBL5pTkR7t8J",
+    "recipientId": "did:abt:z1c8HKfzfGcrMmk2cHPguaZGZWeAtCJkazP",
+    "serviceId": "did:abt:zNKbESQJncfNpnTno4d8j5kt2ZrZuME9xLnL",
+    "planId": "ordinary",
+    "serviceEndpoint": "https://ordinary.example",
+    "policyRevision": 1,
+    "issuedAt": "2026-10-28T06:27:59.199Z",
+    "expiresAt": "2026-10-28T06:37:59.199Z",
+    "totalAmount": "180",
+    "retentionSeconds": 864000,
+    "limits": {
+      "enabled": true,
+      "maxCount": 20,
+      "maxFileBytes": 33554432,
+      "maxTotalBytes": 62914560,
+      "maxMessageCiphertextBytes": 67108864
+    },
+    "settlement": {
+      "profile": "arcblock-transfer-v3-ordinary/1",
+      "assetId": "z35n6UoHSi9MED4uaQy6ozFgKPaZj2UKrurBG",
+      "decimals": 18,
+      "payerId": "did:abt:z1bNj6aF8PRNSBrdC8hEF6kXBL5pTkR7t8J",
+      "payeeId": "did:abt:zNKbESQJncfNpnTno4d8j5kt2ZrZuME9xLnL",
+      "baseAmount": "100",
+      "storageAmount": "80",
+      "pricePerBytePerDay": "2"
+    },
+    "notification": {
+      "profile": "arcblock-transfer-v2-vc/1",
+      "chainId": "beta",
+      "chainEndpoint": "https://beta.abtnetwork.io/api/",
+      "confirmationPolicy": "arcblock-dolt-ledger/1"
+    },
+    "proof": {
+      "algorithm": "Ed25519",
+      "verificationMethod": "did:abt:zNKbESQJncfNpnTno4d8j5kt2ZrZuME9xLnL#identity",
+      "publicKey": "7UkoxijRwsbq6QM4kFmVYSlZJzpcY_k2NsFGFKyHN9E",
+      "signature": "OgSa7ssIsb2LDrm5I0QpaXS2qwjSL6xOg-GUZOFIziH1ajop6A9wqYuuTjwK9y9Hfmko7LF--duhTsML1TltCA"
+    }
+  },
+  "credential": {
+    "proof": {
+      "type": "Ed25519Signature",
+      "created": "2026-10-28T06:27:59.199Z",
+      "proofPurpose": "assertionMethod",
+      "jws": "hYWlYdLKEfIYQ7lEzxMKUr4AlmjfUFGtwjtJoULFJUHOfx8EEqhwIT4zIjHnac2MEbsXm5h5PQvzTIP7nqO4CQ"
+    },
+    "@context": "https://schema.arcblock.io/v0.1/context.jsonld",
+    "id": "z2iU3s2pYM6b2zurGEY7YAw6nMpntiwVRL7br",
+    "type": "DIDMailDeliveryCredential",
+    "issuer": {
+      "id": "zNKbESQJncfNpnTno4d8j5kt2ZrZuME9xLnL",
+      "pk": "zGyGKxMyg1p9SsHfm15MkNUu1u9TN2JtTspcdmrtGUdse",
+      "name": "zNKbESQJncfNpnTno4d8j5kt2ZrZuME9xLnL"
+    },
+    "issuanceDate": "2026-10-28T06:27:59.199Z",
+    "credentialSubject": {
+      "id": "z1c8HKfzfGcrMmk2cHPguaZGZWeAtCJkazP",
+      "protocolVersion": 2,
+      "messageId": "790c4c71-4ebc-4d72-87a5-b1bc3a23a22a",
+      "manifestSha256": "262adbb2b0932d033a812998b53e38d6a15d10e5d60723d06b9541880ebf90b9",
+      "serviceId": "did:abt:zNKbESQJncfNpnTno4d8j5kt2ZrZuME9xLnL",
+      "endpoint": "https://ordinary.example",
+      "termsSha256": "3231e57f56fdfffdd7672f45b0cd5e2e589623ae45aa00a4f8f7da488c54ac28",
+      "profile": "arcblock-transfer-v2-vc/1"
+    }
+  },
+  "receipt": {
+    "protocolVersion": 2,
+    "messageId": "790c4c71-4ebc-4d72-87a5-b1bc3a23a22a",
+    "manifestSha256": "262adbb2b0932d033a812998b53e38d6a15d10e5d60723d06b9541880ebf90b9",
+    "termsId": "b5caa846-57e7-4539-bb96-a81399ba55e4",
+    "termsSha256": "3231e57f56fdfffdd7672f45b0cd5e2e589623ae45aa00a4f8f7da488c54ac28",
+    "senderId": "did:abt:z1bNj6aF8PRNSBrdC8hEF6kXBL5pTkR7t8J",
+    "recipientId": "did:abt:z1c8HKfzfGcrMmk2cHPguaZGZWeAtCJkazP",
+    "serviceId": "did:abt:zNKbESQJncfNpnTno4d8j5kt2ZrZuME9xLnL",
+    "acceptedAt": "2026-10-28T06:28:00.199Z",
+    "deliveredAt": "2026-10-28T06:28:01.199Z",
+    "retentionExpiresAt": "2026-11-07T06:28:01.199Z",
+    "payment": {
+      "mode": "transfer-v3",
+      "transaction": {
+        "chainId": "beta",
+        "transactionId": "448DD09144F57463711887ED4B16A7099B4E7DC3C99FA2F68F060D93C8A2CACC",
+        "confirmedAt": "2026-10-28T06:28:00.699Z",
+        "confirmationPolicy": "arcblock-dolt-ledger/1",
+        "ledgerBackend": "@ocap/statedb-dolt v1.20.2"
+      }
+    },
+    "notification": {
+      "profile": "arcblock-transfer-v2-vc/1",
+      "credentialSha256": "98a961da07ff2040272c041549d3d39aba3859278c03b82df82ee42bbe88f547",
+      "transaction": {
+        "chainId": "beta",
+        "transactionId": "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
+        "confirmedAt": "2026-10-28T06:28:00.699Z",
+        "confirmationPolicy": "arcblock-dolt-ledger/1",
+        "ledgerBackend": "@ocap/statedb-dolt v1.20.2"
+      }
+    },
+    "proof": {
+      "algorithm": "Ed25519",
+      "verificationMethod": "did:abt:zNKbESQJncfNpnTno4d8j5kt2ZrZuME9xLnL#identity",
+      "publicKey": "7UkoxijRwsbq6QM4kFmVYSlZJzpcY_k2NsFGFKyHN9E",
+      "signature": "aJQvnwAJzye_hr_yepuD_hqHCPvElEaA4UifmHFqOi5PEXZweJDpb3CXPU52EsNLD7P6pWQhHuoOY9g2EVEUCQ"
+    }
+  },
+  "paymentRequest": {
+    "encoding": "base64url",
+    "termsId": "b5caa846-57e7-4539-bb96-a81399ba55e4",
+    "termsSha256": "3231e57f56fdfffdd7672f45b0cd5e2e589623ae45aa00a4f8f7da488c54ac28",
+    "unsignedTransaction": "CiN6MWJOajZhRjhQUk5TQnJkQzhoRUY2a1hCTDVwVGtSN3Q4ShCVmu86GgRiZXRhIiDqSmxj4pxSCr71UHsTLsX5lUd2rr6-e5JCHuppFEbSLHJHCiN6MWJOajZhRjhQUk5TQnJkQzhoRUY2a1hCTDVwVGtSN3Q4ShIg6kpsY-KcUgq-9VB7Ey7F-ZVHdq6-vnuSQh7qaRRG0ix6pQQKEGZnOnQ6dHJhbnNmZXJfdjMSkAQKUwojejFiTmo2YUY4UFJOU0JyZEM4aEVGNmtYQkw1cFRrUjd0OEoSLAolejM1bjZVb0hTaTlNRUQ0dWFReTZvekZnS1BhWmoyVUtydXJCRxIDMTgwElQKJHpOS2JFU1FKbmNmTnBuVG5vNGQ4ajVrdDJaclp1TUU5eExuTBIsCiV6MzVuNlVvSFNpOU1FRDR1YVF5Nm96RmdLUGFaajJVS3J1ckJHEgMxODB64gIKBGpzb24S2QJ7InByb3RvY29sVmVyc2lvbiI6MiwibWVzc2FnZUlkIjoiNzkwYzRjNzEtNGViYy00ZDcyLTg3YTUtYjFiYzNhMjNhMjJhIiwibWFuaWZlc3RTaGEyNTYiOiIyNjJhZGJiMmIwOTMyZDAzM2E4MTI5OThiNTNlMzhkNmExNWQxMGU1ZDYwNzIzZDA2Yjk1NDE4ODBlYmY5MGI5IiwidGVybXNJZCI6ImI1Y2FhODQ2LTU3ZTctNDUzOS1iYjk2LWE4MTM5OWJhNTVlNCIsInRlcm1zU2hhMjU2IjoiMzIzMWU1N2Y1NmZkZmZmZGQ3NjcyZjQ1YjBjZDVlMmU1ODk2MjNhZTQ1YWEwMGE0ZjhmN2RhNDg4YzU0YWMyOCIsInNlcnZpY2VJZCI6ImRpZDphYnQ6ek5LYkVTUUpuY2ZOcG5Ubm80ZDhqNWt0MlpyWnVNRTl4TG5MIn2KAQEw"
+  },
+  "signedPayment": "CiN6MWJOajZhRjhQUk5TQnJkQzhoRUY2a1hCTDVwVGtSN3Q4ShCVmu86GgRiZXRhIiDqSmxj4pxSCr71UHsTLsX5lUd2rr6-e5JCHuppFEbSLGpAAi8mh3x7Xq2ExdfwtmNGEymWibV0WSxDcdWa1QWHOhzGYSckBLTY_reUI4ijiXkBPaUPUlg7Iv_2d7Qi9nTFBXKJAQojejFiTmo2YUY4UFJOU0JyZEM4aEVGNmtYQkw1cFRrUjd0OEoSIOpKbGPinFIKvvVQexMuxfmVR3auvr57kkIe6mkURtIsGkAiQAZz2FDmlhQutwCd5_4fG-KexGVjub89YGo4tSKjYQxz-XzjQ2PI-_HPsRhze3a8tJWfLYk_SmsCRXHU-_UNeqUEChBmZzp0OnRyYW5zZmVyX3YzEpAEClMKI3oxYk5qNmFGOFBSTlNCcmRDOGhFRjZrWEJMNXBUa1I3dDhKEiwKJXozNW42VW9IU2k5TUVENHVhUXk2b3pGZ0tQYVpqMlVLcnVyQkcSAzE4MBJUCiR6TktiRVNRSm5jZk5wblRubzRkOGo1a3QyWnJadU1FOXhMbkwSLAolejM1bjZVb0hTaTlNRUQ0dWFReTZvekZnS1BhWmoyVUtydXJCRxIDMTgweuICCgRqc29uEtkCeyJwcm90b2NvbFZlcnNpb24iOjIsIm1lc3NhZ2VJZCI6Ijc5MGM0YzcxLTRlYmMtNGQ3Mi04N2E1LWIxYmMzYTIzYTIyYSIsIm1hbmlmZXN0U2hhMjU2IjoiMjYyYWRiYjJiMDkzMmQwMzNhODEyOTk4YjUzZTM4ZDZhMTVkMTBlNWQ2MDcyM2QwNmI5NTQxODgwZWJmOTBiOSIsInRlcm1zSWQiOiJiNWNhYTg0Ni01N2U3LTQ1MzktYmI5Ni1hODEzOTliYTU1ZTQiLCJ0ZXJtc1NoYTI1NiI6IjMyMzFlNTdmNTZmZGZmZmRkNzY3MmY0NWIwY2Q1ZTJlNTg5NjIzYWU0NWFhMDBhNGY4ZjdkYTQ4OGM1NGFjMjgiLCJzZXJ2aWNlSWQiOiJkaWQ6YWJ0OnpOS2JFU1FKbmNmTnBuVG5vNGQ4ajVrdDJaclp1TUU5eExuTCJ9igEBMA"
+}

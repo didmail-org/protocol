@@ -1,0 +1,49 @@
+{
+  "description": "Lossless compact transport of public SDK fixture; no chain execution.",
+  "sender": "zNKbESQJncfNpnTno4d8j5kt2ZrZuME9xLnL",
+  "recipient": "z1c8HKfzfGcrMmk2cHPguaZGZWeAtCJkazP",
+  "publicKey": "7UkoxijRwsbq6QM4kFmVYSlZJzpcY_k2NsFGFKyHN9E",
+  "wireType": "json",
+  "packed": {
+    "dmp2vc": [
+      1,
+      "z2iTw1dusDFijm9pL4DdUea1KLHe2qqg7hs5t",
+      "eQxMcU68TXKHpbG8OiOiKg",
+      "JirbsrCTLQM6gSmYtT441qFdEOXWByPQa5VBiA6_kLk",
+      "zauKI_HtJPIYl-qs1studIDMLVA-WhcIT3T7FjlR28Q",
+      "https://ordinary.example",
+      1793168879199,
+      "j4qEyVsTLVizsdYpzZ9RRzRT3-8JCQB64_pMcZ_PDgJDxIo3jZrrlF65RtWEZfDbY_5To_PmxLWInN0ncSCTAA"
+    ]
+  },
+  "credential": {
+    "proof": {
+      "type": "Ed25519Signature",
+      "created": "2026-10-28T06:27:59.199Z",
+      "proofPurpose": "assertionMethod",
+      "jws": "j4qEyVsTLVizsdYpzZ9RRzRT3-8JCQB64_pMcZ_PDgJDxIo3jZrrlF65RtWEZfDbY_5To_PmxLWInN0ncSCTAA"
+    },
+    "@context": "https://schema.arcblock.io/v0.1/context.jsonld",
+    "id": "z2iTw1dusDFijm9pL4DdUea1KLHe2qqg7hs5t",
+    "type": "DIDMailDeliveryCredential",
+    "issuer": {
+      "id": "zNKbESQJncfNpnTno4d8j5kt2ZrZuME9xLnL",
+      "pk": "zGyGKxMyg1p9SsHfm15MkNUu1u9TN2JtTspcdmrtGUdse",
+      "name": "zNKbESQJncfNpnTno4d8j5kt2ZrZuME9xLnL"
+    },
+    "issuanceDate": "2026-10-28T06:27:59.199Z",
+    "credentialSubject": {
+      "id": "z1c8HKfzfGcrMmk2cHPguaZGZWeAtCJkazP",
+      "protocolVersion": 2,
+      "messageId": "790c4c71-4ebc-4d72-87a5-b1bc3a23a22a",
+      "manifestSha256": "262adbb2b0932d033a812998b53e38d6a15d10e5d60723d06b9541880ebf90b9",
+      "serviceId": "did:abt:zNKbESQJncfNpnTno4d8j5kt2ZrZuME9xLnL",
+      "endpoint": "https://ordinary.example",
+      "termsSha256": "cdab8a23f1ed24f21897eaacd6cb6e7480cc2d503e5a17084f74fb163951dbc4",
+      "profile": "arcblock-transfer-v2-vc/1"
+    }
+  },
+  "encodedInnerTransfer": "CiN6MWM4SEtmemZHY3JNbWsyY0hQZ3VhWkdaV2VBdENKa2F6UBIDCgEAIioKJXozNW42VW9IU2k5TUVENHVhUXk2b3pGZ0tQYVpqMlVLcnVyQkcSATB6tgIKBGpzb24SrQJ7ImRtcDJ2YyI6WzEsInoyaVR3MWR1c0RGaWptOXBMNERkVWVhMUtMSGUycXFnN2hzNXQiLCJlUXhNY1U2OFRYS0hwYkc4T2lPaUtnIiwiSmlyYnNyQ1RMUU02Z1NtWXRUNDQxcUZkRU9YV0J5UFFhNVZCaUE2X2tMayIsInphdUtJX0h0SlBJWWwtcXMxc3R1ZElETUxWQS1XaGNJVDNUN0ZqbFIyOFEiLCJodHRwczovL29yZGluYXJ5LmV4YW1wbGUiLDE3OTMxNjg4NzkxOTksImo0cUV5VnNUTFZpenNkWXB6WjlSUnpSVDMtOEpDUUI2NF9wTWNaX1BEZ0pEeElvM2pacnJsRjY1UnRXRVpmRGJZXzVUb19QbXhMV0luTjBuY1NDVEFBIl19",
+  "signedTransactionBase64Url": "CiR6TktiRVNRSm5jZk5wblRubzRkOGo1a3QyWnJadU1FOXhMbkwQlZrvOhoEYmV0YSIg7UkoxijRwsbq6QM4kFmVYSlZJzpcY_k2NsFGFKyHN9FqQEmzXzg8KdBJa7KNz9esEXgT27Bg-JIb9RsWwq9JEDseK_PnyxwtnkImMDPRonyk-XK1dmRPVCQ7AWAPkCCUvgZ6pAMKEGZnOnQ6dHJhbnNmZXJfdjISjwMKI3oxYzhIS2Z6Zkdjck1tazJjSFBndWFaR1pXZUF0Q0prYXpQEgMKAQAiKgolejM1bjZVb0hTaTlNRUQ0dWFReTZvekZnS1BhWmoyVUtydXJCRxIBMHq2AgoEanNvbhKtAnsiZG1wMnZjIjpbMSwiejJpVHcxZHVzREZpam05cEw0RGRVZWExS0xIZTJxcWc3aHM1dCIsImVReE1jVTY4VFhLSHBiRzhPaU9pS2ciLCJKaXJic3JDVExRTTZnU21ZdFQ0NDFxRmRFT1hXQnlQUWE1VkJpQTZfa0xrIiwiemF1S0lfSHRKUElZbC1xczFzdHVkSURNTFZBLVdoY0lUM1Q3RmpsUjI4USIsImh0dHBzOi8vb3JkaW5hcnkuZXhhbXBsZSIsMTc5MzE2ODg3OTE5OSwiajRxRXlWc1RMVml6c2RZcHpaOVJSelJUMy04SkNRQjY0X3BNY1pfUERnSkR4SW8zalpycmxGNjVSdFdFWmZEYllfNVRvX1BteExXSW5OMG5jU0NUQUEiXX2KAQEw",
+  "signedTransactionBytes": 576
+}

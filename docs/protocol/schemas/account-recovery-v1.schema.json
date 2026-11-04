@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://didmail.example/schemas/account-recovery-v1",
+  "title": "DIDMail account recovery capsule v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["format", "version", "mailboxId", "kdf", "iterations", "salt", "nonce", "ciphertext"],
+  "properties": {
+    "format": {"const": "didmail-account-recovery"},
+    "version": {"const": 1},
+    "mailboxId": {"type": "string", "pattern": "^did:abt:z[1-9A-HJ-NP-Za-km-z]{20,64}$"},
+    "kdf": {"const": "PBKDF2-SHA256"},
+    "iterations": {"const": 600000},
+    "salt": {"type": "string", "pattern": "^[A-Za-z0-9_-]{22}$"},
+    "nonce": {"type": "string", "pattern": "^[A-Za-z0-9_-]{16}$"},
+    "ciphertext": {"type": "string", "minLength": 22, "maxLength": 87403, "pattern": "^[A-Za-z0-9_-]+$"}
+  },
+  "$comment": "Implementations also check canonical base64url trailing bits, decoded lengths, authenticated header, plaintext schema/signatures, and the 131072-byte serialized envelope limit. JSON schema alone does not validate those cryptographic constraints."
+}

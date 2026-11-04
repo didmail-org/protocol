@@ -1,0 +1,19 @@
+{
+  "description": "Unsigned receipt shape for cross-language validation tests, not chain evidence.",
+  "receipt": {
+    "protocolVersion": 1,
+    "serviceId": "did:abt:zFixture",
+    "funding": {
+      "mode": "node-sponsored",
+      "sponsorId": "did:abt:zFixture",
+      "amount": "100"
+    },
+    "index": {
+      "chainId": "beta",
+      "transactionId": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "confirmedAt": "2026-10-30T00:00:00.000Z",
+      "blockHeight": "1",
+      "assetId": "zFixture"
+    }
+  }
+}

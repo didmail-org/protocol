@@ -1,0 +1,46 @@
+{
+  "name": "@didmail/protocol",
+  "version": "1.0.0-draft.1",
+  "private": true,
+  "description": "DIDMail Protocol 1 reference codecs, crypto and authenticated client",
+  "main": "dist/index.cjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "NOTICE",
+    "THIRD_PARTY_NOTICES"
+  ],
+  "scripts": {
+    "build": "tsc --emitDeclarationOnly && esbuild src/index.ts --bundle --platform=neutral --format=cjs --target=es2022 --outfile=dist/index.cjs && esbuild src/index.ts --bundle --platform=neutral --format=esm --target=es2022 --outfile=dist/index.mjs",
+    "type-check": "tsc --noEmit",
+    "test": "node --test test/*.test.cjs",
+    "prepare": "pnpm run build"
+  },
+  "dependencies": {
+    "@noble/ciphers": "^2.4.0",
+    "@noble/curves": "^2.4.0",
+    "@noble/hashes": "^2.4.0",
+    "@scure/base": "^2.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "esbuild": "^0.28.2",
+    "typescript": "^7.0.2"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.mjs"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/didmail-org/protocol.git"
+  },
+  "license": "Apache-2.0",
+  "packageManager": "pnpm@12.11.2"
+}

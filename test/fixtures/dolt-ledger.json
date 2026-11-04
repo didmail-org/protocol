@@ -1,0 +1,345 @@
+{
+  "publicFixture": true,
+  "scope": "Membership only. Original signed bytes are a public offline fixture; this file does not prove block consensus or validate signatures.",
+  "expectedNetwork": "beta",
+  "now": 1793102400000,
+  "signedTransaction": "2dn3qAF4I3oxZTFndE12THpEYW9FMzFYMnJZc01GWkhEdmM2bXFaV1lNAhsAAAGLz-VoAQNkYmV0YQRYIIqI4910CfGV_VLbLTy6XXLKZwm_HZQSG_N0iAG0D29cDVhA0Cs6zk4kZNXmojiq6xPviu9wzWgY5h_WLW3wQB9Qwr2DqkGDQbdRQ17fz4YKBU460cYMG5RwDks2tGXIFwaDAQ6BowF4I3oxZTFndE12THpEYW9FMzFYMnJZc01GWkhEdmM2bXFaV1lNAlggiojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1wDWECntKaPzQHJF9G1G3ovdiy2EU_C7l6zOnrExpK7ooz2Lj0M4Hr925FBbeDAmyQmw48ouC_Lpbc1mRVFqKt06b8FD6QAcGZnOnQ6dHJhbnNmZXJfdjMBgaIBeCN6MWUxZ3RNdkx6RGFvRTMxWDJyWXNNRlpIRHZjNm1xWldZTQKBogF4JXozNW42VW9IU2k5TUVENHVhUXk2b3pGZ0tQYVpqMlVLcnVyQkcCbzEwMDAwMDAwMDAwMDAxOQKCogF4I3oxVXdUY2o3WlhCS0M4R1V3U0tXMjVoc25OdlJaRThVWUhiAoGiAXglejM1bjZVb0hTaTlNRUQ0dWFReTZvekZnS1BhWmoyVUtydXJCRwJvMTAwMDAwMDAwMDAwMDE4ogF4KjB4NzNBRUFjOEJlMDgyOThmRDM4MzE1MjMzNUExODJFM2UzMDdFYjk1YQKBogF4JXozNW42VW9IU2k5TUVENHVhUXk2b3pGZ0tQYVpqMlVLcnVyQkcCYTEPogBkanNvbgGoZGtpbmR4GGRpZG1haWwtbmFtZWNhcmQtcGF5bWVudGZzZW5kZXJ4I3oxZTFndE12THpEYW9FMzFYMnJZc01GWkhEdmM2bXFaV1lNaGVuZHBvaW50c2h0dHBzOi8vcHVibGljLnRlc3RobmFtZWNhcmRvcHVibGljLW5hbWVjYXJkaHJlY2VpdmVyeCN6MVZhTnJCcGY1VGk3TE5wYzl1OUVibW96M21DSnBvdXNuOGtjb250ZW50SGFzaHhAQTQxNjk0RjZGMUI0MDU4MUVENEQ1MDAxNENFRUQ5MjYyNTZDRjUzODM4OTdEODQ0QTVFNEY3MUU5MTg0OUUyQW1wcmVwYXJhdGlvbklkYjQyb3Byb3RvY29sVmVyc2lvbgERYTc",
+  "response": {
+    "data": {
+      "getChainInfo": {
+        "code": "OK",
+        "info": {
+          "network": "beta",
+          "consensusVersion": "@ocap/statedb-dolt v1.20.2",
+          "synced": true,
+          "blockHeight": "0",
+          "blockTime": ""
+        }
+      },
+      "getTx": {
+        "code": "OK",
+        "info": {
+          "hash": "E62AF5A959120462B852CD0D7A9B4978D8687993C5F5F969213E7E6E97BBB38B",
+          "code": "OK",
+          "height": "0",
+          "time": "2026-10-27T11:59:58.000Z",
+          "tx": {
+            "chainId": "beta"
+          }
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "name": "committed public signed original",
+      "state": "committed"
+    },
+    {
+      "name": "not yet recorded",
+      "path": [
+        "data",
+        "getTx",
+        "info"
+      ],
+      "value": null,
+      "state": "pending"
+    },
+    {
+      "name": "execution rejection",
+      "path": [
+        "data",
+        "getTx",
+        "info",
+        "code"
+      ],
+      "value": "INVALID_SIGNATURE",
+      "state": "rejected"
+    },
+    {
+      "name": "wrong network",
+      "path": [
+        "data",
+        "getChainInfo",
+        "info",
+        "network"
+      ],
+      "value": "main",
+      "state": "invalid"
+    },
+    {
+      "name": "unknown backend",
+      "path": [
+        "data",
+        "getChainInfo",
+        "info",
+        "consensusVersion"
+      ],
+      "value": "@ocap/statedb-dolt v1.20.3",
+      "state": "invalid"
+    },
+    {
+      "name": "similar backend",
+      "path": [
+        "data",
+        "getChainInfo",
+        "info",
+        "consensusVersion"
+      ],
+      "value": "not-ocap/statedb-dolt",
+      "state": "invalid"
+    },
+    {
+      "name": "not synced",
+      "path": [
+        "data",
+        "getChainInfo",
+        "info",
+        "synced"
+      ],
+      "value": false,
+      "state": "invalid"
+    },
+    {
+      "name": "chain outer failure",
+      "path": [
+        "data",
+        "getChainInfo",
+        "code"
+      ],
+      "value": "INTERNAL",
+      "state": "invalid"
+    },
+    {
+      "name": "transaction outer failure",
+      "path": [
+        "data",
+        "getTx",
+        "code"
+      ],
+      "value": "INTERNAL",
+      "state": "invalid"
+    },
+    {
+      "name": "wrong hash",
+      "path": [
+        "data",
+        "getTx",
+        "info",
+        "hash"
+      ],
+      "value": "0000000000000000000000000000000000000000000000000000000000000000",
+      "state": "invalid"
+    },
+    {
+      "name": "lowercase hash",
+      "path": [
+        "data",
+        "getTx",
+        "info",
+        "hash"
+      ],
+      "value": "e62af5a959120462b852cd0d7a9b4978d8687993c5f5f969213e7e6e97bbb38b",
+      "state": "invalid"
+    },
+    {
+      "name": "wrong transaction network",
+      "path": [
+        "data",
+        "getTx",
+        "info",
+        "tx",
+        "chainId"
+      ],
+      "value": "main",
+      "state": "invalid"
+    },
+    {
+      "name": "missing transaction",
+      "path": [
+        "data",
+        "getTx",
+        "info",
+        "tx"
+      ],
+      "value": null,
+      "state": "invalid"
+    },
+    {
+      "name": "unexpected height",
+      "path": [
+        "data",
+        "getTx",
+        "info",
+        "height"
+      ],
+      "value": "1",
+      "state": "invalid"
+    },
+    {
+      "name": "numeric height",
+      "path": [
+        "data",
+        "getTx",
+        "info",
+        "height"
+      ],
+      "value": 0,
+      "state": "invalid"
+    },
+    {
+      "name": "missing height",
+      "path": [
+        "data",
+        "getTx",
+        "info",
+        "height"
+      ],
+      "value": null,
+      "state": "invalid"
+    },
+    {
+      "name": "numeric success code",
+      "path": [
+        "data",
+        "getTx",
+        "info",
+        "code"
+      ],
+      "value": 0,
+      "state": "invalid"
+    },
+    {
+      "name": "numeric success string",
+      "path": [
+        "data",
+        "getTx",
+        "info",
+        "code"
+      ],
+      "value": "0",
+      "state": "invalid"
+    },
+    {
+      "name": "null execution code",
+      "path": [
+        "data",
+        "getTx",
+        "info",
+        "code"
+      ],
+      "value": null,
+      "state": "invalid"
+    },
+    {
+      "name": "bad time",
+      "path": [
+        "data",
+        "getTx",
+        "info",
+        "time"
+      ],
+      "value": "yesterday",
+      "state": "invalid"
+    },
+    {
+      "name": "noncanonical time",
+      "path": [
+        "data",
+        "getTx",
+        "info",
+        "time"
+      ],
+      "value": "2026-10-27T11:59:58Z",
+      "state": "invalid"
+    },
+    {
+      "name": "future bound exact",
+      "path": [
+        "data",
+        "getTx",
+        "info",
+        "time"
+      ],
+      "value": "2026-10-27T12:00:30.000Z",
+      "state": "committed"
+    },
+    {
+      "name": "future bound exceeded",
+      "path": [
+        "data",
+        "getTx",
+        "info",
+        "time"
+      ],
+      "value": "2026-10-27T12:00:30.001Z",
+      "state": "invalid"
+    },
+    {
+      "name": "before epoch",
+      "path": [
+        "data",
+        "getTx",
+        "info",
+        "time"
+      ],
+      "value": "1969-12-31T23:59:59.000Z",
+      "state": "invalid"
+    },
+    {
+      "name": "GraphQL partial errors",
+      "path": [
+        "errors"
+      ],
+      "value": [
+        {
+          "message": "failure"
+        }
+      ],
+      "state": "invalid"
+    },
+    {
+      "name": "malformed GraphQL errors",
+      "path": [
+        "errors"
+      ],
+      "value": {},
+      "state": "invalid"
+    },
+    {
+      "name": "explicit null errors",
+      "path": [
+        "errors"
+      ],
+      "value": null,
+      "state": "invalid"
+    },
+    {
+      "name": "empty GraphQL errors",
+      "path": [
+        "errors"
+      ],
+      "value": [],
+      "state": "committed"
+    },
+    {
+      "name": "missing info is not absence",
+      "remove": [
+        "data",
+        "getTx",
+        "info"
+      ],
+      "state": "invalid"
+    },
+    {
+      "name": "different original bytes",
+      "alterBytes": true,
+      "state": "invalid"
+    },
+    {
+      "name": "empty original bytes",
+      "emptyBytes": true,
+      "state": "invalid"
+    }
+  ]
+}

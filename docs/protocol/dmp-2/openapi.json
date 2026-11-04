@@ -1,0 +1,988 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "DMP/2 ordinary mail experimental API",
+    "version": "2.0.0-draft.1",
+    "description": "Retired ordinary/chain-VC profile. Retained only for offline compatibility tests; not a supported public API. See README.md and the active DMP/1 extensions."
+  },
+  "paths": {
+    "/v2/ordinary/service-config": {
+      "get": {
+        "summary": "Observe experimental availability; does not advertise production DMP/2 support",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Successful resource response"
+          },
+          "400": {
+            "description": "Invalid protocol request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid signed request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Sender admission or gas stake denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Disabled profile, changed terms, replay or acceptance conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Expired ciphertext or retired object namespace",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Body or storage limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Temporarily unavailable; inspect original task",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/ordinary/messages/{messageId}": {
+      "parameters": [
+        {
+          "name": "messageId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+          }
+        }
+      ],
+      "put": {
+        "summary": "Create or resume an immutable encrypted message",
+        "security": [
+          {
+            "DmpIdentity": [],
+            "HttpSignature": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful resource response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/UploadResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid protocol request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid signed request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Sender admission or gas stake denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Disabled profile, changed terms, replay or acceptance conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Expired ciphertext or retired object namespace",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Body or storage limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Temporarily unavailable; inspect original task",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created with signed Terms and missing chunk descriptors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/UploadResponse"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "./schema.json#/$defs/Manifest"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Read delivered message and credential as the sender or recipient",
+        "security": [
+          {
+            "DmpIdentity": [],
+            "HttpSignature": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful resource response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/MessageRead"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid protocol request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid signed request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Sender admission or gas stake denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Disabled profile, changed terms, replay or acceptance conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Expired ciphertext or retired object namespace",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Body or storage limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Temporarily unavailable; inspect original task",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/ordinary/messages/{messageId}/status": {
+      "parameters": [
+        {
+          "name": "messageId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Read durable sender task status without side effects",
+        "security": [
+          {
+            "DmpIdentity": [],
+            "HttpSignature": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful resource response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Status"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid protocol request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid signed request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Sender admission or gas stake denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Disabled profile, changed terms, replay or acceptance conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Expired ciphertext or retired object namespace",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Body or storage limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Temporarily unavailable; inspect original task",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/ordinary/messages/{messageId}/terms": {
+      "parameters": [
+        {
+          "name": "messageId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+          }
+        }
+      ],
+      "post": {
+        "summary": "Refresh unaccepted terms using revision CAS",
+        "security": [
+          {
+            "DmpIdentity": [],
+            "HttpSignature": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful resource response"
+          },
+          "400": {
+            "description": "Invalid protocol request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid signed request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Sender admission or gas stake denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Disabled profile, changed terms, replay or acceptance conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Expired ciphertext or retired object namespace",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Body or storage limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Temporarily unavailable; inspect original task",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "./schema.json#/$defs/RefreshTerms"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/ordinary/messages/{messageId}/submit": {
+      "parameters": [
+        {
+          "name": "messageId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+          }
+        }
+      ],
+      "post": {
+        "summary": "Explicitly accept free terms; no payment transaction",
+        "security": [
+          {
+            "DmpIdentity": [],
+            "HttpSignature": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful resource response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Status"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid protocol request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid signed request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Sender admission or gas stake denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Disabled profile, changed terms, replay or acceptance conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Expired ciphertext or retired object namespace",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Body or storage limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Temporarily unavailable; inspect original task",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Durably accepted, still confirming chain notification",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Status"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "./schema.json#/$defs/Submit"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/ordinary/messages/{messageId}/blobs/{blobId}/chunks/{index}": {
+      "parameters": [
+        {
+          "name": "messageId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+          }
+        },
+        {
+          "name": "blobId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+          }
+        },
+        {
+          "name": "index",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 64
+          }
+        }
+      ],
+      "put": {
+        "summary": "Upload one original immutable encrypted chunk",
+        "security": [
+          {
+            "DmpIdentity": [],
+            "HttpSignature": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful resource response"
+          },
+          "400": {
+            "description": "Invalid protocol request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid signed request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Sender admission or gas stake denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Disabled profile, changed terms, replay or acceptance conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Expired ciphertext or retired object namespace",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Body or storage limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Temporarily unavailable; inspect original task",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/octet-stream": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Download an authorized unexpired encrypted chunk",
+        "security": [
+          {
+            "DmpIdentity": [],
+            "HttpSignature": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ciphertext with Content-Digest",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid protocol request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid signed request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Sender admission or gas stake denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Disabled profile, changed terms, replay or acceptance conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Expired ciphertext or retired object namespace",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Body or storage limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Temporarily unavailable; inspect original task",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/ordinary/messages/{messageId}/prepare-payment": {
+      "parameters": [
+        {
+          "name": "messageId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+          }
+        }
+      ],
+      "post": {
+        "summary": "Prepare one original TransferV3 service payment for nonzero ordinary terms",
+        "security": [
+          {
+            "DmpIdentity": [],
+            "HttpSignature": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Durably accepted, still confirming chain notification",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/PaymentPreparation"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid protocol request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid signed request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Sender admission or gas stake denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Disabled profile, changed terms, replay or acceptance conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Expired ciphertext or retired object namespace",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Body or storage limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Temporarily unavailable; inspect original task",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./schema.json#/$defs/Problem"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "./schema.json#/$defs/PreparePayment"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "DmpIdentity": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "DMP-Identity"
+      },
+      "HttpSignature": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Signature"
+      }
+    }
+  }
+}

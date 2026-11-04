@@ -1,0 +1,847 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "DIDMail Protocol 1",
+    "version": "1.0.0-draft.1",
+    "description": "Unreleased working draft. Strict RFC9421 profile described in specification.md; not an IETF standard."
+  },
+  "paths": {
+    "/.well-known/didmail": {
+      "get": {
+        "operationId": "discover",
+        "summary": "discover",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Resource or status returned"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Signature missing/invalid"
+          },
+          "409": {
+            "description": "Replay, immutable conflict or state conflict"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "security": []
+      }
+    },
+    "/v1/identities/{identityId}/encryption-keys": {
+      "get": {
+        "operationId": "listEncryptionKeys",
+        "summary": "listEncryptionKeys",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "identityId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource or status returned"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Signature missing/invalid"
+          },
+          "409": {
+            "description": "Replay, immutable conflict or state conflict"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "security": []
+      }
+    },
+    "/v1/identities/{identityId}/encryption-keys/{keyId}": {
+      "get": {
+        "operationId": "getEncryptionKey",
+        "summary": "getEncryptionKey",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "identityId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "keyId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource or status returned"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Signature missing/invalid"
+          },
+          "409": {
+            "description": "Replay, immutable conflict or state conflict"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "security": []
+      },
+      "put": {
+        "operationId": "registerEncryptionKey",
+        "summary": "registerEncryptionKey",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "identityId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "keyId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource or status returned"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Signature missing/invalid"
+          },
+          "409": {
+            "description": "Replay, immutable conflict or state conflict"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "security": [
+          {
+            "DmpIdentity": [],
+            "DmpSignatureInput": [],
+            "DmpSignature": [],
+            "ContentDigest": [],
+            "DmpIdentityKey": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "./schema.json#/$defs/KeyRecord"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/identities/{identityId}/encryption-keys/{keyId}/revocations": {
+      "post": {
+        "operationId": "revokeEncryptionKey",
+        "summary": "revokeEncryptionKey",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "identityId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "keyId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource or status returned"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Signature missing/invalid"
+          },
+          "409": {
+            "description": "Replay, immutable conflict or state conflict"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "security": [
+          {
+            "DmpIdentity": [],
+            "DmpSignatureInput": [],
+            "DmpSignature": [],
+            "ContentDigest": [],
+            "DmpIdentityKey": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "./schema.json#/$defs/KeyRevocation"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/messages": {
+      "get": {
+        "operationId": "listMessages",
+        "summary": "List external messages, or internal messages using delivery=server and a monotonic delivery sequence cursor",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "mailbox",
+            "required": true,
+            "schema": {
+              "enum": [
+                "inbox",
+                "outbox"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "name": "delivery",
+            "schema": {
+              "enum": [
+                "server"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "name": "cursor",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Opaque cursor; internal lists use delivery sequence rather than UUID"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource or status returned"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Signature missing/invalid"
+          },
+          "409": {
+            "description": "Replay, immutable conflict or state conflict"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "security": [
+          {
+            "DmpIdentity": [],
+            "DmpSignatureInput": [],
+            "DmpSignature": [],
+            "ContentDigest": [],
+            "DmpIdentityKey": []
+          }
+        ]
+      }
+    },
+    "/v1/messages/{messageId}": {
+      "put": {
+        "operationId": "createUploadSession",
+        "summary": "createUploadSession",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "messageId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource or status returned"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Signature missing/invalid"
+          },
+          "409": {
+            "description": "Replay, immutable conflict or state conflict"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          },
+          "201": {
+            "description": "Immutable upload session created"
+          }
+        },
+        "security": [
+          {
+            "DmpIdentity": [],
+            "DmpSignatureInput": [],
+            "DmpSignature": [],
+            "ContentDigest": [],
+            "DmpIdentityKey": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "./schema.json#/$defs/Manifest"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getMessage",
+        "summary": "getMessage",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "messageId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource or status returned"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Signature missing/invalid"
+          },
+          "409": {
+            "description": "Replay, immutable conflict or state conflict"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "security": [
+          {
+            "DmpIdentity": [],
+            "DmpSignatureInput": [],
+            "DmpSignature": [],
+            "ContentDigest": [],
+            "DmpIdentityKey": []
+          }
+        ]
+      }
+    },
+    "/v1/messages/{messageId}/quotes": {
+      "post": {
+        "operationId": "refreshQuote",
+        "summary": "refreshQuote",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "messageId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource or status returned"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Signature missing/invalid"
+          },
+          "409": {
+            "description": "Replay, immutable conflict or state conflict"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "security": [
+          {
+            "DmpIdentity": [],
+            "DmpSignatureInput": [],
+            "DmpSignature": [],
+            "ContentDigest": [],
+            "DmpIdentityKey": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "expectedRevision": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 9007199254740991
+                  },
+                  "previousQuoteId": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                  }
+                },
+                "required": [
+                  "expectedRevision",
+                  "previousQuoteId"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/messages/{messageId}/prepare": {
+      "post": {
+        "operationId": "preparePayment",
+        "summary": "preparePayment",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "messageId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource or status returned"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Signature missing/invalid"
+          },
+          "409": {
+            "description": "Replay, immutable conflict or state conflict"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "security": [
+          {
+            "DmpIdentity": [],
+            "DmpSignatureInput": [],
+            "DmpSignature": [],
+            "ContentDigest": [],
+            "DmpIdentityKey": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "quoteId": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                  }
+                },
+                "required": [
+                  "quoteId"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/messages/{messageId}/submit": {
+      "post": {
+        "operationId": "submitDelivery",
+        "summary": "submitDelivery",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "messageId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource or status returned"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Signature missing/invalid"
+          },
+          "409": {
+            "description": "Replay, immutable conflict or state conflict"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          },
+          "202": {
+            "description": "Durable delivery accepted; poll Location with a fresh signed GET",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Delivery status URL"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "DmpIdentity": [],
+            "DmpSignatureInput": [],
+            "DmpSignature": [],
+            "ContentDigest": [],
+            "DmpIdentityKey": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "quoteId": {
+                        "type": "string",
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                      },
+                      "signedTransaction": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9_-]+$"
+                      }
+                    },
+                    "required": [
+                      "quoteId",
+                      "signedTransaction"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "quoteId": {
+                        "type": "string",
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                      },
+                      "delivery": {
+                        "const": "server"
+                      }
+                    },
+                    "required": [
+                      "quoteId",
+                      "delivery"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "quoteId": {
+                        "type": "string",
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                      },
+                      "fundingMode": {
+                        "const": "node-sponsored"
+                      }
+                    },
+                    "required": [
+                      "quoteId",
+                      "fundingMode"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/messages/{messageId}/status": {
+      "get": {
+        "operationId": "getDeliveryStatus",
+        "summary": "getDeliveryStatus",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "messageId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource or status returned"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Signature missing/invalid"
+          },
+          "409": {
+            "description": "Replay, immutable conflict or state conflict"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "security": [
+          {
+            "DmpIdentity": [],
+            "DmpSignatureInput": [],
+            "DmpSignature": [],
+            "ContentDigest": [],
+            "DmpIdentityKey": []
+          }
+        ]
+      }
+    },
+    "/v1/messages/{messageId}/blobs/{blobId}/chunks/{index}": {
+      "put": {
+        "operationId": "uploadCiphertextChunk",
+        "summary": "uploadCiphertextChunk",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "messageId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "blobId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "index",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource or status returned"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Signature missing/invalid"
+          },
+          "409": {
+            "description": "Replay, immutable conflict or state conflict"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "security": [
+          {
+            "DmpIdentity": [],
+            "DmpSignatureInput": [],
+            "DmpSignature": [],
+            "ContentDigest": [],
+            "DmpIdentityKey": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/octet-stream": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "downloadCiphertextChunk",
+        "summary": "downloadCiphertextChunk",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "messageId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "blobId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "index",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource or status returned"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Signature missing/invalid"
+          },
+          "409": {
+            "description": "Replay, immutable conflict or state conflict"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "security": [
+          {
+            "DmpIdentity": [],
+            "DmpSignatureInput": [],
+            "DmpSignature": [],
+            "ContentDigest": [],
+            "DmpIdentityKey": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "DmpIdentity": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "DMP-Identity",
+        "description": "Part of the mandatory combined DMP RFC9421 signature profile; not independently sufficient."
+      },
+      "DmpIdentityKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "DMP-Identity-Key",
+        "description": "Part of the mandatory combined DMP RFC9421 signature profile; not independently sufficient."
+      },
+      "DmpSignatureInput": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Signature-Input",
+        "description": "Part of the mandatory combined DMP RFC9421 signature profile; not independently sufficient."
+      },
+      "DmpSignature": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Signature",
+        "description": "Part of the mandatory combined DMP RFC9421 signature profile; not independently sufficient."
+      },
+      "ContentDigest": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Content-Digest",
+        "description": "Part of the mandatory combined DMP RFC9421 signature profile; not independently sufficient."
+      }
+    }
+  }
+}

@@ -1,0 +1,1102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://didmail.example/protocol/dmp-2/schema.json",
+  "title": "DMP/2 ordinary mail experimental profile",
+  "$defs": {
+    "Proof": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {
+          "const": "Ed25519"
+        },
+        "verificationMethod": {
+          "type": "string"
+        },
+        "publicKey": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]+$"
+        },
+        "signature": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]+$"
+        }
+      },
+      "required": [
+        "algorithm",
+        "verificationMethod",
+        "publicKey",
+        "signature"
+      ]
+    },
+    "KeyRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "protocolVersion": {
+          "const": 1
+        },
+        "ownerId": {
+          "type": "string",
+          "pattern": "^did:abt:z[1-9A-HJ-NP-Za-km-z]{20,64}$"
+        },
+        "keyId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "cryptoSuite": {
+          "const": "HPKE-X25519-HKDF-SHA256-AES256GCM"
+        },
+        "publicKey": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]+$"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "proof": {
+          "$ref": "#/$defs/Proof"
+        }
+      },
+      "required": [
+        "protocolVersion",
+        "ownerId",
+        "keyId",
+        "cryptoSuite",
+        "publicKey",
+        "createdAt",
+        "expiresAt",
+        "proof"
+      ]
+    },
+    "KeyRevocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "protocolVersion": {
+          "const": 1
+        },
+        "ownerId": {
+          "type": "string",
+          "pattern": "^did:abt:z[1-9A-HJ-NP-Za-km-z]{20,64}$"
+        },
+        "keyId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "revokedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "reason": {
+          "enum": [
+            "rotated",
+            "compromised",
+            "retired"
+          ]
+        },
+        "proof": {
+          "$ref": "#/$defs/Proof"
+        }
+      },
+      "required": [
+        "protocolVersion",
+        "ownerId",
+        "keyId",
+        "revokedAt",
+        "reason",
+        "proof"
+      ]
+    },
+    "Blob": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "blobId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "sizeBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "chunkCount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65
+        },
+        "ciphertextSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "chunkSha256": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "minItems": 1,
+          "maxItems": 65
+        }
+      },
+      "required": [
+        "blobId",
+        "sizeBytes",
+        "chunkCount",
+        "ciphertextSha256",
+        "chunkSha256"
+      ]
+    },
+    "KeyEnvelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ownerId": {
+          "type": "string",
+          "pattern": "^did:abt:z[1-9A-HJ-NP-Za-km-z]{20,64}$"
+        },
+        "keyId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "keyRecord": {
+          "$ref": "#/$defs/KeyRecord"
+        },
+        "encapsulatedKey": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]+$"
+        },
+        "ciphertext": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]+$"
+        }
+      },
+      "required": [
+        "ownerId",
+        "keyId",
+        "keyRecord",
+        "encapsulatedKey",
+        "ciphertext"
+      ]
+    },
+    "Manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "protocolVersion": {
+          "const": 2
+        },
+        "messageId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "senderId": {
+          "type": "string",
+          "pattern": "^did:abt:z[1-9A-HJ-NP-Za-km-z]{20,64}$"
+        },
+        "recipientId": {
+          "type": "string",
+          "pattern": "^did:abt:z[1-9A-HJ-NP-Za-km-z]{20,64}$"
+        },
+        "serviceId": {
+          "type": "string",
+          "pattern": "^did:abt:z[1-9A-HJ-NP-Za-km-z]{20,64}$"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "planId": {
+          "const": "ordinary"
+        },
+        "cryptoSuite": {
+          "const": "HPKE-X25519-HKDF-SHA256-AES256GCM"
+        },
+        "keyEnvelopes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/KeyEnvelope"
+          },
+          "minItems": 1,
+          "maxItems": 2
+        },
+        "documentBlobId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "blobs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Blob"
+          },
+          "minItems": 1,
+          "maxItems": 21
+        },
+        "proof": {
+          "$ref": "#/$defs/Proof"
+        }
+      },
+      "required": [
+        "protocolVersion",
+        "messageId",
+        "senderId",
+        "recipientId",
+        "serviceId",
+        "createdAt",
+        "planId",
+        "cryptoSuite",
+        "keyEnvelopes",
+        "documentBlobId",
+        "blobs",
+        "proof"
+      ]
+    },
+    "Problem": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "minimum": 400,
+          "maximum": 599
+        },
+        "code": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]*$"
+        },
+        "detail": {
+          "type": "string"
+        },
+        "requestId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "recoveryAction": {
+          "type": "string"
+        },
+        "retryAfterSeconds": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "type",
+        "title",
+        "status",
+        "code",
+        "detail",
+        "requestId",
+        "recoveryAction"
+      ]
+    },
+    "Limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "maxCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 20
+        },
+        "maxFileBytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 67108864
+        },
+        "maxTotalBytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 67108864
+        },
+        "maxMessageCiphertextBytes": {
+          "type": "integer",
+          "minimum": 16,
+          "maximum": 67108864
+        }
+      },
+      "required": [
+        "enabled",
+        "maxCount",
+        "maxFileBytes",
+        "maxTotalBytes",
+        "maxMessageCiphertextBytes"
+      ]
+    },
+    "NotificationProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "arcblock-transfer-v2-vc/1"
+        },
+        "chainId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,128}$"
+        },
+        "chainEndpoint": {
+          "type": "string",
+          "format": "uri"
+        },
+        "confirmationPolicy": {
+          "enum": [
+            "arcblock-committed",
+            "arcblock-dolt-ledger/1"
+          ]
+        }
+      },
+      "required": [
+        "profile",
+        "chainId",
+        "chainEndpoint",
+        "confirmationPolicy"
+      ]
+    },
+    "Terms": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "protocolVersion": {
+          "const": 2
+        },
+        "termsId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "messageId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "manifestSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "senderId": {
+          "type": "string",
+          "pattern": "^did:abt:z[1-9A-HJ-NP-Za-km-z]{20,64}$"
+        },
+        "recipientId": {
+          "type": "string",
+          "pattern": "^did:abt:z[1-9A-HJ-NP-Za-km-z]{20,64}$"
+        },
+        "serviceId": {
+          "type": "string",
+          "pattern": "^did:abt:z[1-9A-HJ-NP-Za-km-z]{20,64}$"
+        },
+        "planId": {
+          "const": "ordinary"
+        },
+        "policyRevision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "issuedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "totalAmount": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,77})$"
+        },
+        "retentionSeconds": {
+          "type": "integer",
+          "minimum": 86400,
+          "maximum": 3153600000
+        },
+        "limits": {
+          "$ref": "#/$defs/Limits"
+        },
+        "settlement": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "profile": {
+                  "const": "none"
+                }
+              },
+              "required": [
+                "profile"
+              ]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "profile": {
+                  "const": "arcblock-transfer-v3-ordinary/1"
+                },
+                "assetId": {
+                  "type": "string"
+                },
+                "decimals": {
+                  "const": 18
+                },
+                "payerId": {
+                  "type": "string"
+                },
+                "payeeId": {
+                  "type": "string"
+                },
+                "baseAmount": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]{0,77})$"
+                },
+                "storageAmount": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]{0,77})$"
+                },
+                "pricePerBytePerDay": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]{0,77})$"
+                }
+              },
+              "required": [
+                "profile",
+                "assetId",
+                "decimals",
+                "payerId",
+                "payeeId",
+                "baseAmount",
+                "storageAmount",
+                "pricePerBytePerDay"
+              ]
+            }
+          ]
+        },
+        "notification": {
+          "$ref": "#/$defs/NotificationProfile"
+        },
+        "proof": {
+          "$ref": "#/$defs/Proof"
+        },
+        "serviceEndpoint": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": [
+        "protocolVersion",
+        "termsId",
+        "messageId",
+        "manifestSha256",
+        "senderId",
+        "recipientId",
+        "serviceId",
+        "planId",
+        "policyRevision",
+        "issuedAt",
+        "expiresAt",
+        "totalAmount",
+        "retentionSeconds",
+        "limits",
+        "settlement",
+        "notification",
+        "proof",
+        "serviceEndpoint"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "settlement": {
+                "properties": {
+                  "profile": {
+                    "const": "none"
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "totalAmount": {
+                "const": "0"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "totalAmount": {
+                "type": "string",
+                "pattern": "^[1-9][0-9]{0,77}$"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "CredentialSubject": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^z[1-9A-HJ-NP-Za-km-z]{20,64}$"
+        },
+        "protocolVersion": {
+          "const": 2
+        },
+        "messageId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "manifestSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "serviceId": {
+          "type": "string",
+          "pattern": "^did:abt:z[1-9A-HJ-NP-Za-km-z]{20,64}$"
+        },
+        "endpoint": {
+          "type": "string",
+          "format": "uri"
+        },
+        "termsSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "profile": {
+          "const": "arcblock-transfer-v2-vc/1"
+        }
+      },
+      "required": [
+        "id",
+        "protocolVersion",
+        "messageId",
+        "manifestSha256",
+        "serviceId",
+        "endpoint",
+        "termsSha256",
+        "profile"
+      ]
+    },
+    "Credential": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "@context": {
+          "const": "https://schema.arcblock.io/v0.1/context.jsonld"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^z[1-9A-HJ-NP-Za-km-z]{20,64}$"
+        },
+        "type": {
+          "const": "DIDMailDeliveryCredential"
+        },
+        "issuer": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^z[1-9A-HJ-NP-Za-km-z]{20,64}$"
+            },
+            "pk": {
+              "type": "string",
+              "pattern": "^z[1-9A-HJ-NP-Za-km-z]{32,44}$"
+            },
+            "name": {
+              "type": "string",
+              "maxLength": 128
+            }
+          },
+          "required": [
+            "id",
+            "pk",
+            "name"
+          ]
+        },
+        "issuanceDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "credentialSubject": {
+          "$ref": "#/$defs/CredentialSubject"
+        },
+        "proof": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "const": "Ed25519Signature"
+            },
+            "created": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "proofPurpose": {
+              "const": "assertionMethod"
+            },
+            "jws": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{86}$"
+            }
+          },
+          "required": [
+            "type",
+            "created",
+            "proofPurpose",
+            "jws"
+          ]
+        }
+      },
+      "required": [
+        "@context",
+        "id",
+        "type",
+        "issuer",
+        "issuanceDate",
+        "credentialSubject",
+        "proof"
+      ]
+    },
+    "ChainConfirmation": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "chainId": {
+              "type": "string"
+            },
+            "transactionId": {
+              "type": "string",
+              "pattern": "^[0-9A-F]{64}$"
+            },
+            "blockHeight": {
+              "type": "string",
+              "pattern": "^[1-9][0-9]*$"
+            },
+            "confirmedAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "confirmationPolicy": {
+              "const": "arcblock-committed"
+            }
+          },
+          "required": [
+            "chainId",
+            "transactionId",
+            "blockHeight",
+            "confirmedAt"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "chainId": {
+              "type": "string"
+            },
+            "transactionId": {
+              "type": "string",
+              "pattern": "^[0-9A-F]{64}$"
+            },
+            "confirmedAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "confirmationPolicy": {
+              "const": "arcblock-dolt-ledger/1"
+            },
+            "ledgerBackend": {
+              "const": "@ocap/statedb-dolt v1.20.2"
+            }
+          },
+          "required": [
+            "chainId",
+            "transactionId",
+            "confirmedAt",
+            "confirmationPolicy",
+            "ledgerBackend"
+          ]
+        }
+      ]
+    },
+    "Receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "protocolVersion": {
+          "const": 2
+        },
+        "messageId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "manifestSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "termsId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "termsSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "senderId": {
+          "type": "string",
+          "pattern": "^did:abt:z[1-9A-HJ-NP-Za-km-z]{20,64}$"
+        },
+        "recipientId": {
+          "type": "string",
+          "pattern": "^did:abt:z[1-9A-HJ-NP-Za-km-z]{20,64}$"
+        },
+        "serviceId": {
+          "type": "string",
+          "pattern": "^did:abt:z[1-9A-HJ-NP-Za-km-z]{20,64}$"
+        },
+        "acceptedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "deliveredAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "retentionExpiresAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "payment": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "mode": {
+                  "const": "none"
+                }
+              },
+              "required": [
+                "mode"
+              ]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "mode": {
+                  "const": "transfer-v3"
+                },
+                "transaction": {
+                  "$ref": "#/$defs/ChainConfirmation"
+                }
+              },
+              "required": [
+                "mode",
+                "transaction"
+              ]
+            }
+          ]
+        },
+        "notification": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "profile": {
+              "const": "arcblock-transfer-v2-vc/1"
+            },
+            "credentialSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "transaction": {
+              "$ref": "#/$defs/ChainConfirmation"
+            }
+          },
+          "required": [
+            "profile",
+            "credentialSha256",
+            "transaction"
+          ]
+        },
+        "proof": {
+          "$ref": "#/$defs/Proof"
+        }
+      },
+      "required": [
+        "protocolVersion",
+        "messageId",
+        "manifestSha256",
+        "termsId",
+        "termsSha256",
+        "senderId",
+        "recipientId",
+        "serviceId",
+        "acceptedAt",
+        "deliveredAt",
+        "retentionExpiresAt",
+        "payment",
+        "notification",
+        "proof"
+      ]
+    },
+    "Submit": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "expectedRevision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "termsId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "termsSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "signedPayment": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 65536,
+          "pattern": "^[A-Za-z0-9_-]+$"
+        }
+      },
+      "required": [
+        "expectedRevision",
+        "termsId",
+        "termsSha256"
+      ]
+    },
+    "RefreshTerms": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "expectedRevision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "previousTermsId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        }
+      },
+      "required": [
+        "expectedRevision",
+        "previousTermsId"
+      ]
+    },
+    "Status": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "messageId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "state": {
+          "enum": [
+            "uploading",
+            "queued",
+            "notification_pending",
+            "delivered",
+            "reconciliation_required",
+            "expired",
+            "rejected",
+            "payment_pending",
+            "payment_confirmed"
+          ]
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "acceptedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "notificationTransactionId": {
+          "type": "string",
+          "pattern": "^[0-9A-F]{64}$"
+        },
+        "receipt": {
+          "$ref": "#/$defs/Receipt"
+        },
+        "problem": {
+          "$ref": "#/$defs/Problem"
+        },
+        "retryAfterSeconds": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "paymentTransactionId": {
+          "type": "string",
+          "pattern": "^[0-9A-F]{64}$"
+        }
+      },
+      "required": [
+        "messageId",
+        "state",
+        "revision",
+        "updatedAt"
+      ]
+    },
+    "UploadResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "terms": {
+          "$ref": "#/$defs/Terms"
+        },
+        "status": {
+          "$ref": "#/$defs/Status"
+        },
+        "missingChunks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "blobId": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+              },
+              "index": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 64
+              }
+            },
+            "required": [
+              "blobId",
+              "index"
+            ]
+          }
+        }
+      },
+      "required": [
+        "terms",
+        "status",
+        "missingChunks"
+      ]
+    },
+    "MessageRead": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "manifest": {
+          "$ref": "#/$defs/Manifest"
+        },
+        "terms": {
+          "$ref": "#/$defs/Terms"
+        },
+        "receipt": {
+          "$ref": "#/$defs/Receipt"
+        },
+        "credential": {
+          "$ref": "#/$defs/Credential"
+        }
+      },
+      "required": [
+        "manifest",
+        "terms"
+      ]
+    },
+    "PreparePayment": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "expectedRevision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "termsId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "termsSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "expectedRevision",
+        "termsId",
+        "termsSha256"
+      ]
+    },
+    "PaymentRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "encoding": {
+          "const": "base64url"
+        },
+        "termsId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "termsSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "unsignedTransaction": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 65536,
+          "pattern": "^[A-Za-z0-9_-]+$"
+        }
+      },
+      "required": [
+        "encoding",
+        "termsId",
+        "termsSha256",
+        "unsignedTransaction"
+      ]
+    },
+    "PaymentPreparation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "paymentRequest": {
+          "$ref": "#/$defs/PaymentRequest"
+        },
+        "status": {
+          "$ref": "#/$defs/Status"
+        }
+      },
+      "required": [
+        "paymentRequest",
+        "status"
+      ]
+    }
+  },
+  "$comment": "Retired profile: compatibility-test artifact only. See README.md; do not enable ordinary/chain-VC delivery."
+}

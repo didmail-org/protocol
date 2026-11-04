@@ -1,0 +1,40 @@
+{
+  "description": "PUBLIC TEST VECTOR ONLY. Never fund or use this key for mail.",
+  "password": "PUBLIC test vector password",
+  "body": {
+    "version": 1,
+    "mailboxId": "did:abt:z1jfv9QxJMM6cavHzFGEx5LcwWskpv9ZxU2",
+    "seed": "JSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSU",
+    "keys": [
+      {
+        "record": {
+          "protocolVersion": 1,
+          "ownerId": "did:abt:z1jfv9QxJMM6cavHzFGEx5LcwWskpv9ZxU2",
+          "keyId": "07e6335291500f9332b3842bc0893e9320dea21c9f56a1ce7e6d0827bab87f4c",
+          "cryptoSuite": "HPKE-X25519-HKDF-SHA256-AES256GCM",
+          "publicKey": "kguGfLlHEhW3VCEGdRflqb1Gd-HhzhOkw7fULTOGuGQ",
+          "createdAt": "2026-01-01T00:00:00.000Z",
+          "expiresAt": "2027-01-01T00:00:00.000Z",
+          "proof": {
+            "algorithm": "Ed25519",
+            "verificationMethod": "did:abt:z1jfv9QxJMM6cavHzFGEx5LcwWskpv9ZxU2#identity",
+            "publicKey": "vtfSq2aNo--tYTmY8G96v3h186a3Z3qfPOlH1313YKY",
+            "signature": "sQJ1Ilcp3-ZuFKlkcOmwqRjVe_LE4YaAV6kCqHlDB5Q7HomXxVbhRafDqUl-lisJqWhpR6huFnoY5_hVSyfPCg"
+          }
+        },
+        "privateKey": "JiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiY"
+      }
+    ],
+    "revocations": []
+  },
+  "capsule": {
+    "format": "didmail-account-recovery",
+    "version": 1,
+    "mailboxId": "did:abt:z1jfv9QxJMM6cavHzFGEx5LcwWskpv9ZxU2",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 600000,
+    "salt": "A8pGj0VyWt06Oy1O0CLeTA",
+    "nonce": "95plMpSikKmesQGf",
+    "ciphertext": "qt1NSgmkN3oG9yLxztPBZPjs1ifbn7i72u-AKqnAkJTD25pYKluF-z6wIylry2vckE7CJ-P0GYjUbw3ecfy2osFGFixzB-WPJcBcuu0-56ARr7CrWdGhO7s_DrnPwrY7DSLnGa2NK8TE6JxdMXNI_VquFJMMAPJ0xoNIrHMrK9MmABoFCsNtIZf_MreKQhch-fSnKhmrbsvCfBBMmIsioNp7vlG9wVIGbk1B-YEnMoR_sqw2JNcLntrwakw-4ZPAHb0Jf67Fu9srFPeSlQSPZ_WzFE3vqq2XcOziLzhVI_WoWVv4TWbyMp4aSc4RnWMJiggTHlC_d1zH_ErIe2wM2wgL0D3e4aPbt2oFUJEG7GCQ0YGcawdDERABPysn2EU_JgxFvnkc6GJ_10i6gQj5gNA1KQT8iyu0gzrw7n1sG5oaz2O3vMNuPIi9TcJ6w41lQ0wd0WgIaOb9Jy-obutEO1qfB6w6VIjUO8fYW_RSZqbpfzIKNh2OI2NbM5mj7hEB5HbvvBFcWc3O-v5buSNP2XoGova-9oTmg5WqX3ch0LUmTu5wpIGuVmVx8Hbize6hZl22B2docgWCvCvxzVgi7BDf7fLtydFrlRWI07dM_z66X_QV2YqvIVNj_0d_e4E6IG5fXeOb8Xw4S-5WfrNoytojiDsxP9ZbxeKWdV7OkSYmdLwBR9RmTu-Y8TuX1W5JrJkDQCYA30BBGansv4Xb6jLTzy3yTcegDzmlNDqZLrgDllDACruD3qY7lVzsy6GGUUSsw-N0cVamuM88Or0TJBp7Hyu1cAOU3oiTdFJqi4Zw3_zYEv9AxYyl85eFTLixHw_nOp5lGY93lGO5NNKUO4dwpHd-lc-xg9UEYHJcF1kH52VQIMJHbyUbTujYQxtDAi_OssomDr8GQSLKy7FKLq19pqyHckn99p54HSwrM23sEkZ9iSHBLtkCti0sNxORHVmxjfWG5K6BPlrMpyXCYhuoh4Fidvq9rh5HZiGbZ9g-TVyWA5jb-jFm4jS0uIyEwAG5rWJlvV98x4iJHHFcDNRYp34mXbTCEwey-QYiYtHK1fH2vxoYu5GXG2REgz5hJkNREJQAxHRQIiLJvNDeCyXVI-I4vx_eEQo"
+  }
+}

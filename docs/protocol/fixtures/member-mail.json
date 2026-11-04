@@ -1,0 +1,170 @@
+{
+  "description": "Public deterministic offline test seeds; never fund these identities. No chain transactions.",
+  "publicTestSeeds": [
+    31,
+    32,
+    33
+  ],
+  "manifest": {
+    "protocolVersion": 1,
+    "messageId": "45cb2217-484d-4d2c-80bd-0483be8ce458",
+    "senderId": "did:abt:z1bGEt6gtZKgbL7GmCYxr6w1XcBo4RoFoY1",
+    "recipientId": "did:abt:z1X5HgHwQND2jAisTVQERGjU9maumVjZmUL",
+    "serviceId": "did:abt:z1k5h83xfu3Mdar2qiHLiUXzeWnMk9yMmpZ",
+    "createdAt": "2026-10-30T13:15:13.638Z",
+    "planId": "auto",
+    "automaticDelivery": true,
+    "cryptoSuite": "HPKE-X25519-HKDF-SHA256-AES256GCM",
+    "keyEnvelopes": [
+      {
+        "ownerId": "did:abt:z1bGEt6gtZKgbL7GmCYxr6w1XcBo4RoFoY1",
+        "keyId": "21aa0bfc9f7770023b882af5b14e1c5d0c18d43253fe0e60bdb32667b6f35d0d",
+        "keyRecord": {
+          "protocolVersion": 1,
+          "ownerId": "did:abt:z1bGEt6gtZKgbL7GmCYxr6w1XcBo4RoFoY1",
+          "keyId": "21aa0bfc9f7770023b882af5b14e1c5d0c18d43253fe0e60bdb32667b6f35d0d",
+          "cryptoSuite": "HPKE-X25519-HKDF-SHA256-AES256GCM",
+          "publicKey": "V1-xwFjLTLAQD_CowBDSg8n8NRSo_qrsLfzMNbN_kWQ",
+          "createdAt": "2026-10-30T13:15:13.619Z",
+          "expiresAt": "2027-10-30T13:15:13.619Z",
+          "proof": {
+            "algorithm": "Ed25519",
+            "verificationMethod": "did:abt:z1bGEt6gtZKgbL7GmCYxr6w1XcBo4RoFoY1#identity",
+            "publicKey": "QwRr_kCSs-lJlOraFdzCDYqqB7ZY_TlU644O-4vcpd4",
+            "signature": "SUQ7xSntqxYzh4T6sGpr5aGjEMFRpDPqrIxyB0wUYCKg8KoTt4_5r4tooruAkaAIGBrJ1WRxFa0ywW5RHUU3Ag"
+          }
+        },
+        "encapsulatedKey": "4dZVC7y54_CWmsPAjiiHkvtllfOe0m5wzeij0I2Dk2s",
+        "ciphertext": "HlpfXjWU5vJxBPyNiP8sIvf-uNVZVL5IodySlks8pyRdQTR8208EspzoHio_7xYb"
+      },
+      {
+        "ownerId": "did:abt:z1X5HgHwQND2jAisTVQERGjU9maumVjZmUL",
+        "keyId": "23a422a1d2ceac59b66e05e98c3de34ef575bee17319453c93ef34d3b6030261",
+        "keyRecord": {
+          "protocolVersion": 1,
+          "ownerId": "did:abt:z1X5HgHwQND2jAisTVQERGjU9maumVjZmUL",
+          "keyId": "23a422a1d2ceac59b66e05e98c3de34ef575bee17319453c93ef34d3b6030261",
+          "cryptoSuite": "HPKE-X25519-HKDF-SHA256-AES256GCM",
+          "publicKey": "xN-t0uJN-DLeDaslhowdiNFVZX_d9I2Ua7rLmBOT234",
+          "createdAt": "2026-10-30T13:15:13.622Z",
+          "expiresAt": "2027-10-30T13:15:13.622Z",
+          "proof": {
+            "algorithm": "Ed25519",
+            "verificationMethod": "did:abt:z1X5HgHwQND2jAisTVQERGjU9maumVjZmUL#identity",
+            "publicKey": "TtMvY7818O7vyyXyii4fvchzrig1ZxsMlGD18S5FVqg",
+            "signature": "3LVMAU__UIHJ_L22FgqCbbhe7zAZU8dIPZE98PwaKnzRpvgVCVuyCz-WsGbxSnrhz7WnQT0HOpW3SjCo3648CQ"
+          }
+        },
+        "encapsulatedKey": "nMIU3CM3c39b96OXfxhWMDF9yZyf3SarrHt_McmZc3U",
+        "ciphertext": "a1l-PONb9dopk-KuHobV4nOgBRpiqUGaVGWGdOOCjUghHNbawC3p7g-QmM0naKut"
+      }
+    ],
+    "documentBlobId": "799a32b2-e7b7-4f44-9cab-f550359f1ef4",
+    "blobs": [
+      {
+        "blobId": "799a32b2-e7b7-4f44-9cab-f550359f1ef4",
+        "sizeBytes": 287,
+        "chunkCount": 1,
+        "ciphertextSha256": "e630cb1e5343c451068742652c1a077118d4f908c3fd9e05c29cb90551b289da",
+        "chunkSha256": [
+          "e630cb1e5343c451068742652c1a077118d4f908c3fd9e05c29cb90551b289da"
+        ]
+      },
+      {
+        "blobId": "bfe03fe7-df37-4806-ba9a-be10b3144e4c",
+        "sizeBytes": 19,
+        "chunkCount": 1,
+        "ciphertextSha256": "2e7b3c15575f97f415d8b4c7bd9aaa94381e1e26cb60594349b10a91a4925925",
+        "chunkSha256": [
+          "2e7b3c15575f97f415d8b4c7bd9aaa94381e1e26cb60594349b10a91a4925925"
+        ]
+      }
+    ],
+    "proof": {
+      "algorithm": "Ed25519",
+      "verificationMethod": "did:abt:z1bGEt6gtZKgbL7GmCYxr6w1XcBo4RoFoY1#identity",
+      "publicKey": "QwRr_kCSs-lJlOraFdzCDYqqB7ZY_TlU644O-4vcpd4",
+      "signature": "zFElTwqED_HzllcKEluBpIQ-G0G8XiDn5nu-NMeXd1bXHWGgIsBvoieyMPV8gFvlETynwpKk8YQmY478Kf2PCA"
+    }
+  },
+  "chunks": {
+    "799a32b2-e7b7-4f44-9cab-f550359f1ef4": [
+      "13xqvjiHxb6l_ctrCPaN0Tkx7ZqkiOjnYjGEOGxcOgK7GnhrJ-3vM94Ppp4ulOCx6lKpy7QoV-DFdAFMoRtxyFFT-9ZD9gPJjlDoiMovaBVCfXbVem4YfvoOTxf3kzkkptrFADP5kjDk5u8uchw-G7i5q_FwZLdq5idlKPPYCBMgccr5FcrLbmstDhkwxrsZeC6xYJI9ywFqyNt_L750cobFGvpY25qpvVN58qKkrAleiQ8omeQj2O8H9O3XcjzyknaqiKWEw8mTzjDaeTETeLCoaS1pJ4RmMFH6yOiZY4EBM881RppiE96ZYTDbfo7HDYnXRGl3F5HqJsu33_1w5EBYfZGweopO-sIPTm8sT5aNDJi6rhzABFsiTMrTKJ4"
+    ],
+    "bfe03fe7-df37-4806-ba9a-be10b3144e4c": [
+      "oBt06TMZ6yRyvQQXJus9ObrnaA"
+    ]
+  },
+  "quote": {
+    "quoteId": "3c2e271a-1590-42da-91fb-c6385be3feeb",
+    "quoteVersion": 1,
+    "messageId": "45cb2217-484d-4d2c-80bd-0483be8ce458",
+    "manifestSha256": "65a485ed918582d917ff310d4323b8ec51aa1d9f92de3b8d4d299a9325ecc41a",
+    "serviceId": "did:abt:z1k5h83xfu3Mdar2qiHLiUXzeWnMk9yMmpZ",
+    "planId": "auto",
+    "issuedAt": "2026-10-30T13:15:13.638Z",
+    "expiresAt": "2026-10-30T13:25:13.638Z",
+    "delivery": "server",
+    "policyRevision": 1,
+    "memberBindings": {
+      "senderRevision": 1,
+      "recipientRevision": 1
+    },
+    "paymentAsset": {
+      "chainId": "beta",
+      "assetId": "zFixtureToken",
+      "decimals": 18,
+      "symbol": "TBA"
+    },
+    "envelopeAmount": "0",
+    "storageAmount": "0",
+    "totalAmount": "0",
+    "indexAmount": "0",
+    "developerAmount": "0",
+    "serviceAmount": "0",
+    "retention": {
+      "mode": "finite",
+      "durationSeconds": 2592000
+    },
+    "settlement": {
+      "profile": "none",
+      "chainId": "beta",
+      "chainEndpoint": "https://fixture.invalid/",
+      "paymentAssetId": "zFixtureToken",
+      "paymentAssetDecimals": 18,
+      "envelopeFactoryId": "",
+      "messageFactoryId": "",
+      "payerId": "did:abt:z1bGEt6gtZKgbL7GmCYxr6w1XcBo4RoFoY1",
+      "servicePayeeAddress": "z1k5h83xfu3Mdar2qiHLiUXzeWnMk9yMmpZ",
+      "developerPayeeAddress": "",
+      "indexLocatorField": "subject",
+      "confirmationPolicy": "arcblock-committed"
+    },
+    "proof": {
+      "algorithm": "Ed25519",
+      "verificationMethod": "did:abt:z1k5h83xfu3Mdar2qiHLiUXzeWnMk9yMmpZ#identity",
+      "publicKey": "iEuIV_TqoWE8YVBNs01L6vNGUXoOMd483dTZtCAdnQs",
+      "signature": "btNbhLE378zORiYlOY_m8n0RBUHye_VHHsJ2t04-7p9VO0yjHSwQ8trUz_56-AkvCOOtt07GDzD4df0SGenZCA"
+    }
+  },
+  "receipt": {
+    "protocolVersion": 1,
+    "messageId": "45cb2217-484d-4d2c-80bd-0483be8ce458",
+    "manifestSha256": "65a485ed918582d917ff310d4323b8ec51aa1d9f92de3b8d4d299a9325ecc41a",
+    "quoteId": "3c2e271a-1590-42da-91fb-c6385be3feeb",
+    "senderId": "did:abt:z1bGEt6gtZKgbL7GmCYxr6w1XcBo4RoFoY1",
+    "recipientId": "did:abt:z1X5HgHwQND2jAisTVQERGjU9maumVjZmUL",
+    "serviceId": "did:abt:z1k5h83xfu3Mdar2qiHLiUXzeWnMk9yMmpZ",
+    "acceptedAt": "2026-10-30T13:15:13.638Z",
+    "deliveredAt": "2026-10-30T13:15:13.638Z",
+    "retentionExpiresAt": "2026-11-29T13:15:13.638Z",
+    "delivery": "server",
+    "termsSha256": "8097c08b9d1b3897869926b839b0b76117a3040d2bf1e1d040cc3820941ed2d9",
+    "proof": {
+      "algorithm": "Ed25519",
+      "verificationMethod": "did:abt:z1k5h83xfu3Mdar2qiHLiUXzeWnMk9yMmpZ#identity",
+      "publicKey": "iEuIV_TqoWE8YVBNs01L6vNGUXoOMd483dTZtCAdnQs",
+      "signature": "u0tKe90mLmmUNwbKHXZnrJipGBVEgf9tW5hVzFtDT6PviEVQWf8YipXOZUW3Ngl63eHDlCqELwQzVbajN1SqDQ"
+    }
+  }
+}

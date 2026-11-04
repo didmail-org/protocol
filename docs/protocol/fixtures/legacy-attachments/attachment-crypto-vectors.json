@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "status": "real",
+  "generatedAt": "2026-08-07T16:02:13.983Z",
+  "notes": [
+    "NaCl Box: nonce(24) || ciphertext; ED25519 keys converted via ed2curve (same as extension Box).",
+    "Nonces are fixed for determinism (byte fill 1..5); production uses nacl.randomBytes.",
+    "expectedContentHash = SHA3-256(encrypted).slice(-64).toUpperCase() via @ocap/mcrypto hashFn(..., 1).",
+    "Mail hash uses encrypted subject/content bytes (not plaintext UTF-8).",
+    "Base58 key fields are multibase z-prefixed (toBase58 of raw key bytes). Hex fields are 0x-prefixed wallet form.",
+    "Keys are test-only; do not use in production."
+  ],
+  "senderSecretKeyBase58": "z47LNDLE2ZryHWC8w2gAp6CDKtUwmkiu5J7PUnLKQusva3gKxfGaKX9xHqw4PSgC15wBEE1DMKDSPtxqJeoSmAiwQ",
+  "senderPublicKeyBase58": "zJ7L6Eqba8LWfqPzyhHYSE8yZkFtnXtzcWydKcgTeq6Dc",
+  "receiverSecretKeyBase58": "zLrSuto38jX69i3EJxLNhRv4dkfoE47fYTa7tKmHqdoUE2Ns8xBtACx1QtuNGur22nqH8a2TnFdmbhJzp99ESPan",
+  "receiverPublicKeyBase58": "z9VbGRf1TzuF8TvYjBNftyq9KLtfTAeTZMFUYgrDRHBwL",
+  "senderSecretKeyHex": "0x9b835aba9f9a286d184cb039304bc54cb2bb33e61772ebc40520950b0be6d532fe35bf834153c1dc38a1078c282d797b9406701ca3923b187b33847f163736df",
+  "senderPublicKeyHex": "0xfe35bf834153c1dc38a1078c282d797b9406701ca3923b187b33847f163736df",
+  "receiverSecretKeyHex": "0x111ebcd01676f20096ab0fa26a22677e8a2b4e1bd54660492996c1077a777ef57e3080b0cfeec8ee8ff7500de4e94f8276500072609481320ac74c5282f6aff7",
+  "receiverPublicKeyHex": "0x7e3080b0cfeec8ee8ff7500de4e94f8276500072609481320ac74c5282f6aff7",
+  "did": "z1mMu4gzxyEDDbJ1ART3Mp4p7MSHKTtu3rM",
+  "receiver": "z1gSCyDepLvirtxAAg6xR3VBUxaLXLuyPx7",
+  "envelope": "z3CtExampleEnvelopeForAttachmentFixture0001",
+  "subjectUtf8": "hello",
+  "contentUtf8": "world",
+  "subjectEncryptedHex": "010101010101010101010101010101010101010101010101922e62263e8a7e9974b39efa7bd89a6dd9dd6b83e9",
+  "contentEncryptedHex": "0202020202020202020202020202020202020202020202026374ed1796f779b3380d3ffabdccf70e867b3da003",
+  "nonces": {
+    "subject": "010101010101010101010101010101010101010101010101",
+    "content": "020202020202020202020202020202020202020202020202",
+    "attachment": "030303030303030303030303030303030303030303030303",
+    "name": "040404040404040404040404040404040404040404040404",
+    "mime": "050505050505050505050505050505050505050505050505"
+  },
+  "attachments": [
+    {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "plainHex": "00010203040506070809",
+      "name": "测试.bin",
+      "mime": "application/octet-stream",
+      "encryptedHex": "0303030303030303030303030303030303030303030303037ffa927231b616c9a1393fed93451aa9ce0b8a54d2bb3440e74b",
+      "encryptedNameBase58": "z3sSoez35XTiWwN7nk6TmtiK8vqPpnrZSBpVGNdD4dg7LhFihYXcAUHgAGesH5H7WUYGu",
+      "encryptedMimeBase58": "z6pc4LiB8KHAPvbUbkozrTcPL5zXspYBdNmPZfB3y7P3X8AjyQ5eUHCpN9oH9PtWMHgAiMVNfcdJjJMhJfCst2Ew",
+      "expectedSize": 10,
+      "expectedEncryptedLen": 50,
+      "expectedContentHash": "686D6652B0E210ED24E38E3FDBF3A9EA0891228732437C1CDCF2465D980A22BA"
+    }
+  ],
+  "expectedMailHashWithAttachments": "E7973D32209D0FD28C5BC17BEA5602FACE9D30FC1BC675389D871A10AED407E2",
+  "expectedMailHashWithoutAttachments": "96B634DA4DB366F3FC602B82954DA92805278C7777D8122A0F9FAE18198D59CB",
+  "downloadSignMessageExample": {
+    "mailId": "42",
+    "attachmentId": "00000000-0000-4000-8000-000000000001",
+    "timeStamp": "1699999999999",
+    "message": "42-00000000-0000-4000-8000-000000000001-1699999999999"
+  }
+}
