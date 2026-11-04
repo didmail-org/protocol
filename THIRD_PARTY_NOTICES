@@ -107,3 +107,25 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+
+========================================================================
+CFRG HPKE compatibility test data (source repository only)
+========================================================================
+
+The JSON fixture in docs/protocol/dmp-1/fixtures/hpke-rfc9180.json
+contains a selection of public test-vector values and records from the CFRG
+HPKE test vectors. The RFC 9180 reference identifies this upstream revision:
+https://github.com/cfrg/draft-irtf-cfrg-hpke/blob/5f503c564da00b0687b3de75f1dfbdfc4079ad31/test-vectors.json
+
+The upstream repository's contribution policy describes its materials as
+IETF contributions subject to BCP 78, BCP 79 and the IETF Trust Legal
+Provisions: https://github.com/cfrg/draft-irtf-cfrg-hpke/blob/5f503c564da00b0687b3de75f1dfbdfc4079ad31/CONTRIBUTING.md
+RFC 9180 identifies copyright (c) 2022 IETF Trust and its document authors
+and identifies itself as an IRTF-stream document:
+https://www.rfc-editor.org/rfc/rfc9180.html
+
+The applicable permission and notice requirements for this particular
+selection remain under review. In particular, the IETF Trust Legal Provisions
+state that their Section 4 does not apply to IRTF-stream documents. Do not
+assume that the project Apache-2.0 license applies to this third-party data.
+The fixture is not included in the SDK's configured npm package file list.
