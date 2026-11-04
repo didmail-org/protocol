@@ -2,7 +2,8 @@
 /**
  * Regenerate docs/protocol/fixtures/legacy-attachments/attachment-crypto-vectors.json
  *
- * Run from the repository root after installing extension dependencies:
+ * Run from the protocol repository root after installing dependencies in the
+ * sibling extension/ checkout:
  *
  *   node docs/protocol/fixtures/legacy-attachments/generate-attachment-vectors.mjs
  *
@@ -17,7 +18,7 @@ import { createRequire } from 'module';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const extensionRoot = path.resolve(__dirname, '../../../../apps/extension');
+const extensionRoot = path.resolve(__dirname, '../../../../../extension');
 const require = createRequire(path.join(extensionRoot, 'package.json'));
 
 const ocapUtil = require('@ocap/util');

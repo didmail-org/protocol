@@ -4,7 +4,7 @@ Status: retained historical ciphertext fixtures. Audience: compatibility-test ma
 
 `attachment-crypto-vectors.json` contains deterministic public-key/nonce inputs for the older NaCl Box attachment format. It preserves ciphertext size/hash, mail-hash and signed-download string expectations; it does not describe the current DMP/1 HPKE/chunk format.
 
-Regenerate from the repository root after installing the extension dependencies:
+Regenerate from the `protocol/` repository root after installing dependencies in the sibling `extension/` checkout:
 
 ```sh
 node docs/protocol/fixtures/legacy-attachments/generate-attachment-vectors.mjs
