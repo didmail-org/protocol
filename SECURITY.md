@@ -6,4 +6,4 @@ Do not post private keys, recovery phrases, decrypted mail, access tokens or exp
 
 Local `.env`, `.dev.vars`, wallets, databases, ARC homes and Wrangler state must stay outside Git. Public network addresses and public keys in configuration examples are not credentials. Fixture keys are test-only and must never control funded accounts or real user data.
 
-A project-wide supported-version and disclosure policy will be established before the first public release.
+Security fixes are considered for the current default branch. This repository is under active development; older commits and unreleased builds do not have a separate support guarantee. Maintainers should enable and verify GitHub private vulnerability reporting when the repository becomes public.
