@@ -35,4 +35,4 @@ Fixture keys and nonces are deliberately public test material. They must never c
 
 Preserve signed preimages, exact field sets, canonical encodings and identity derivation unless the task explicitly changes a protocol contract. Update strict validators, schemas where applicable, shared fixtures and all consumers together. Import the complete mobile SDK snapshot through its documented tool; never patch individual vendored files.
 
-See [development](https://github.com/didmail-org/didmail/blob/main/docs/development.md), [documentation policy](https://github.com/didmail-org/didmail/blob/main/docs/documentation.md) and [release gates](https://github.com/didmail-org/didmail/blob/main/docs/status.md).
+See [development](https://github.com/didmail-org/overview/blob/main/docs/development.md), [documentation policy](https://github.com/didmail-org/overview/blob/main/docs/documentation.md) and [release gates](https://github.com/didmail-org/overview/blob/main/docs/status.md).

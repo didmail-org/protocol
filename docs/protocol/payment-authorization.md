@@ -18,7 +18,7 @@ SDK callers expose guarded signing callbacks and public identity, not unrestrict
 
 Construct both signatures in the required order and independently verify them. Before network submission, durably preserve complete original signed/unsigned bytes, accepted quote, immutable message identity and required encrypted task content. Response loss is not nonpayment. Do not replace a transaction, nonce, quote or ciphertext during recovery without a separately specified authorized workflow.
 
-Original-byte verification and signed service receipts are separate from chain confirmation. Explicit block/Dolt policies cannot be mixed or inferred from query success. See [task recovery](task-recovery.md), [DMP/1](dmp-1/specification.md) and [current release gates](https://github.com/didmail-org/didmail/blob/main/docs/status.md).
+Original-byte verification and signed service receipts are separate from chain confirmation. Explicit block/Dolt policies cannot be mixed or inferred from query success. See [task recovery](task-recovery.md), [DMP/1](dmp-1/specification.md) and [current release gates](https://github.com/didmail-org/overview/blob/main/docs/status.md).
 
 ## Compatibility evidence
 
