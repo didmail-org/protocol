@@ -2,14 +2,31 @@
 
 Status: unreleased working drafts. Audience: protocol implementers and security reviewers. English is authoritative. These documents are not an IETF/ISO standard or an independent cryptographic audit.
 
+## Choose a task
+
+The main reading path is [SDK setup](../../README.md), this contract index, then
+[implementation/integration](dmp-1/implementation.md). Select only the relevant
+normative/security contracts below; they are different responsibilities, not
+successive versions to merge.
+
+| Task | Read |
+| --- | --- |
+| Implement wire codecs or authenticated HTTP | Base specification, schemas and fixture provenance |
+| Integrate bounded transport, confirmation or receiving-key APIs | [SDK integration](dmp-1/implementation.md#sdk-integration-contracts) |
+| Change encryption-key transfer files | [Portable archive](device-key-archive.md); account recovery capsule remains separate |
+| Authorize wallet spending or recover original tasks | [Payment guards](payment-authorization.md) and [task recovery](task-recovery.md) |
+| Change eligibility, visibility or automatic delivery | Member, category and sponsorship contracts below |
+| Bind ARC identity to a mailbox or restore an encrypted capsule | [Onboarding](account-onboarding.md) and its schema/vectors |
+| Maintain retired ciphertext/wire compatibility | Legacy fixture README and DMP/2 boundary below |
+
 ## Active contracts
 
 | Contract                                               | Purpose                                                                   | Implementation/evidence                                                                                  |
 | ------------------------------------------------------ | ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| [DMP/1 base specification](dmp-1/specification.md)     | Discovery, authenticated requests, artifacts, encryption and NFT delivery | [SDK source](../../src), [Worker API](https://github.com/didmail-org/server/blob/main/workers/dmp-api.ts)                |
+| [DMP/1 base specification](dmp-1/specification.md)     | Discovery, authenticated requests, artifacts, encryption and NFT delivery | [SDK source](../../src), [Native ARC protocol handlers](https://github.com/didmail-org/server/tree/main/blocklet/providers/didmail-http/source/protocol)                |
 | [Member direct storage](member-mail.md)                | Explicit automatic-delivery extension and offline server receipt          | [Shared vectors](fixtures/member-mail.json), [SDK tests](../../test)                  |
-| [Envelope/namecard categories](envelope-categories.md) | Signed member-only visibility, immutable categories and admission         | [Server routes](https://github.com/didmail-org/server/tree/main/api/src/routes)                                                            |
-| [Node-sponsored NFT](member-sponsored-nft.md)          | Zero sender payment with a real node-funded NFT                           | [Worker delivery](https://github.com/didmail-org/server/tree/main/workers) and SDK conformance tests                                       |
+| [Envelope/namecard categories](envelope-categories.md) | Signed member-only visibility, immutable categories and admission         | [Server routes](https://github.com/didmail-org/server/tree/main/blocklet/providers/didmail-http/source/api/src/routes)                                                            |
+| [Node-sponsored NFT](member-sponsored-nft.md)          | Zero sender payment with a real node-funded NFT                           | [Native ARC delivery](https://github.com/didmail-org/server/tree/main/blocklet/providers/didmail-http/source/protocol) and SDK conformance tests                                       |
 | [Mailbox onboarding](account-onboarding.md)            | Approved associations, signed lookup and optional encrypted recovery      | [Recovery schema](schemas/account-recovery-v1.schema.json), [vectors](fixtures/account-recovery-v1.json) |
 
 The member and sponsored-NFT contracts extend the base draft explicitly. Read them together; base-profile references to a paid envelope do not describe internal member delivery. Existing paid signatures and ciphertext encodings remain unchanged. DMP/1 is the public mail protocol; historical mail send/download routes return `410 PROTOCOL_RETIRED`.

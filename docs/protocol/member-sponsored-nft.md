@@ -26,4 +26,4 @@ The recipient can be outside the organization. Reading uses the real NFT locator
 
 ## Evidence
 
-SDK, Worker and all clients implement explicit branches. Isolated tests check real transaction encoding, a positive node mint, single durable broadcast intent, restart recovery, receipts and attachment decryption. They do not prove a new live-chain delivery. See [release gates](https://github.com/didmail-org/overview/blob/main/docs/status.md).
+SDK, native ARC server and all clients implement explicit branches. Isolated tests check real transaction encoding, a positive node mint, single durable broadcast intent, restart recovery, receipts and attachment decryption. They do not prove a new live-chain delivery. See [release gates](https://github.com/didmail-org/overview/blob/main/docs/status.md).

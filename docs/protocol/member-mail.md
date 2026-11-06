@@ -1,6 +1,6 @@
 # Member direct-storage extension
 
-Status: implemented working draft, reviewed 2026-10-30. Scope: DMP/1, active Worker and three clients. Isolated regression is available; enterprise remote deployment and physical-device end-to-end acceptance remain release gates.
+Status: implemented working draft, reviewed 2026-10-30. Scope: DMP/1, native ARC server and three clients. Isolated regression is available; enterprise remote deployment and physical-device end-to-end acceptance remain release gates.
 
 ## Automatic selection and eligibility
 
@@ -24,7 +24,7 @@ The server-signed receipt is the offline delivery credential; no duplicate VC or
 
 ## Durable acceptance
 
-Upload, complete digest verification, acceptance and delivery are separate stages. Acceptance CAS binds both local associations, policy revision, original terms, all receiving keys and upload lifecycle. Remote ARC changes cannot be committed atomically with D1; the final authoritative observation is the membership decision. Local revocation and acceptance serialize through database conditions.
+Upload, complete digest verification, acceptance and delivery are separate stages. Acceptance CAS binds both local associations, policy revision, original terms, all receiving keys and upload lifecycle. Remote ARC changes cannot be committed atomically with the local AFS transaction; the final authoritative observation is the membership decision. Local revocation and acceptance serialize through database conditions.
 
 Only mark `delivered` once all ciphertext is durable and the receipt and mailbox entry are queryable. This does not mean read or downloaded. Keep existing leases, idempotent IDs, immutable manifests and restart recovery. The internal path does not call settlement/mint adapters or occupy chain-wallet lanes.
 
@@ -40,7 +40,7 @@ Current clients rescan and idempotently merge on refresh. The server supplies st
 
 ## Deployment and limits
 
-Apply [0016_member_mail.sql](https://github.com/didmail-org/server/blob/main/workers/migrations/0016_member_mail.sql) and [0017_external_upload_sessions.sql](https://github.com/didmail-org/server/blob/main/workers/migrations/0017_external_upload_sessions.sql). Existing rows default to `delivery_kind=nft`; historical ciphertext and transactions are not rewritten. The external unpaid-session index excludes internal uploads. Internal indexes use separate tables. Configure a trusted `ARC_MEMBERS` source, enabled account associations and actual user bindings. A cached client badge never grants authorization.
+Preserve the ordered schema migrations, including [0016_member_mail.sql](https://github.com/didmail-org/server/blob/main/blocklet/providers/didmail-business/migrations/0016_member_mail.sql) and [0017_external_upload_sessions.sql](https://github.com/didmail-org/server/blob/main/blocklet/providers/didmail-business/migrations/0017_external_upload_sessions.sql). Existing rows default to `delivery_kind=nft`; historical ciphertext and transactions are not rewritten. The external unpaid-session index excludes internal uploads. Internal indexes use separate tables. Configure a trusted `ARC_MEMBERS` source, enabled account associations and actual user bindings. A cached client badge never grants authorization.
 
 | Deployment setting | Default | Meaning |
 | ------------------ | ------- | ------- |
